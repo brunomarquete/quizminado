@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      <div style="text-align: center">QUIZMINADO</div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fundo" padding>
+
+  <div style="text-align: center; margin-bottom: 20px">
+    <ion-img width="180" height="110" src="/assets/imgs/logo.png"></ion-img>
+ </div>
+
+  <button ion-button block color="dark" (click)="createAccount()" large full>
+    Criar conta
+  </button>
+
+  <p text-center>Ou</p>
+
+  <button ion-button block (click)="signInWithEmailPage()" color="dark" large full>
+    Entrar com e-mail e senha
+  </button>
+
+  <button ion-button block icon-left margin-top (click)="signInWithGoogle()" color="danger" large full>
+    <ion-icon name="logo-google"></ion-icon>
+    Entrar com o Google
+  </button>
+
+  <button ion-button block icon-left color="facebook" margin-top (click)="signInWithFacebook()"  color="dark" large full>
+    <ion-icon name="logo-facebook"></ion-icon>
+    Entrar com o Facebook
+  </button>
+
+  <button ion-button block icon-left color="twitter" margin-top (click)="signInWithTwitter()"  color="dark" large full>
+    <ion-icon name="logo-twitter"></ion-icon>
+    Entrar com o Twitter
+  </button>
+
+</ion-content>

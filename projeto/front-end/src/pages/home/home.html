@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar color="dark">
+      <ion-title>
+        <div style="text-align: center">QUIZMINADO</div>
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content class="fundo" padding>
+
+      <div style="text-align: center; margin-bottom: 20px">
+          <ion-img width="180" height="110" src="/assets/imgs/logo.png"></ion-img>
+       </div>
+
+       <button ion-button block color="dark" (click)="signOut()" large full>
+          <ion-icon name="game-controller-a"></ion-icon>&nbsp;JOGAR
+      </button>
+
+      <button ion-button block color="dark" (click)="signOut()" large full>
+          <ion-icon name="stats"></ion-icon>&nbsp;RANKING
+      </button>
+
+      <button ion-button block color="dark" (click)="signOut()" large full>
+          <ion-icon name="logo-twitch"></ion-icon>&nbsp;CRÉDITOS
+      </button>
+  
+      <button ion-button block color="dark" (click)="signOut()" large full>
+          <ion-icon name="power"></ion-icon>&nbsp;SAIR
+      </button>
+  
+  
+  </ion-content>
