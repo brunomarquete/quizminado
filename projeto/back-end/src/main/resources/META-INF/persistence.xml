@@ -5,6 +5,9 @@
 	<persistence-unit name="quizminado" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>br.com.ppcacws.model.Disciplina</class>
+		<class>br.com.ppcacws.model.Nivel</class>
+		<class>br.com.ppcacws.model.Questao</class>
+		<class>br.com.ppcacws.model.Resposta</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_quizminado" />

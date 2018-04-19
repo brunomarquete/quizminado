@@ -8,4 +8,8 @@ import javax.inject.Named;
 public class QuestaoService {
 	
 	
+	public void responderQuestao() {
+		
+	}
+	
 }

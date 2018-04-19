@@ -59,6 +59,43 @@ public class QuestaoRepository {
 
 		return listaQuestoes;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Questao> buscarQuestoesPorDisciplinaENivelRandom(Integer codigoDisciplina, Integer codigoNivel) {
+
+		List<Questao> listaQuestoes = null;
+
+		try {
+			
+			StringBuilder queryBuilder = new StringBuilder();
+			
+			queryBuilder.append(" SELECT q FROM Questao q ");
+			
+			queryBuilder.append(" 	INNER JOIN q.disciplina d ");
+			
+			queryBuilder.append(" 	INNER JOIN q.nivel n ");
+			
+			queryBuilder.append(" WHERE d.idDisciplina = :P_CODIGO_DISCIPLINA ");
+			
+			queryBuilder.append(" AND n.idNivel = :P_CODIGO_NIVEL ");
+			
+			queryBuilder.append(" ORDER BY RAND() ");
+
+			Query query = this.entityManager.createQuery(queryBuilder.toString());
+			
+			query.setParameter("P_CODIGO_DISCIPLINA", codigoDisciplina);
+			
+			query.setParameter("P_CODIGO_NIVEL", codigoNivel);
+			
+			listaQuestoes = (List<Questao>) query.getResultList();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return listaQuestoes;
+	}
 
 	public boolean salvar(Questao questao) {
 

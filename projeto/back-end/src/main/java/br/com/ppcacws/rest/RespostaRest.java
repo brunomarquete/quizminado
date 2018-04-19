@@ -74,6 +74,41 @@ public class RespostaRest {
 	}
 	
 	@GET
+	@Path("/buscarRespostaCertaPorQuestao/{idQuestao:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarRespostaCertaPorQuestao(@PathParam("idQuestao") String idQuestao) {
+		
+		JSONObject json = null;
+		
+		Map<String, String> response = new HashMap<String, String>();
+		
+		RespostaVo resposta = null;
+		
+		GenericEntity<RespostaVo> entity = null;
+		
+		try {
+			
+			Resposta respostaEntity = respostaRepository.getRespostaCertaPorQuestao(Integer.parseInt(idQuestao));
+			
+			resposta = RespostaVo.clone(respostaEntity);
+			
+			entity = new GenericEntity<RespostaVo>(resposta) {};
+			
+			return Response.ok(entity).build();
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			response.put("Mensagem", "Nenhuma Resposta encontrada para o Id da Questão: " + idQuestao);
+			
+			json = new JSONObject(response);
+			
+			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+		}
+	}
+	
+	@GET
 	@Path("/listarRespostas")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getListarRespostas() {

@@ -59,6 +59,36 @@ public class RespostaRepository {
 
 		return listaRespostas;
 	}
+	
+	public Resposta getRespostaCertaPorQuestao(Integer codigoQuestao) {
+
+		Resposta resposta = null;
+
+		try {
+			
+			StringBuilder queryBuilder = new StringBuilder();
+			
+			queryBuilder.append(" SELECT r FROM Resposta r ");
+			
+			queryBuilder.append(" 	INNER JOIN r.questao q ");
+			
+			queryBuilder.append(" WHERE q.idQuestao = :P_CODIGO_QUESTAO ");
+			
+			queryBuilder.append(" 	AND r.situacaoResposta = 'C' ");
+
+			Query query = this.entityManager.createQuery(queryBuilder.toString());
+			
+			query.setParameter("P_CODIGO_QUESTAO", codigoQuestao);
+			
+			resposta = (Resposta) query.getSingleResult();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return resposta;
+	}
 
 	public boolean salvar(Resposta resposta) {
 
