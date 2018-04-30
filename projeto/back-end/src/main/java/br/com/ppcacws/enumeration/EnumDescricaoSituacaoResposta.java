@@ -5,38 +5,68 @@ import java.util.Map;
 
 public enum EnumDescricaoSituacaoResposta {
 
-	C("Certo"), E("Errado");
+	CERTO("C", "Certo"), ERRADO("E", "Errado");
 
-    private String descricaoSituacaoReposta;
+	private String situacaoReposta;
+	private String descricaoSituacaoReposta;
 
-	private static final Map<String, EnumDescricaoSituacaoResposta> constanteToEnum = new HashMap<String, EnumDescricaoSituacaoResposta>();	
-    
-    EnumDescricaoSituacaoResposta(String descricaoSituacaoReposta) {
-        
-    		this.descricaoSituacaoReposta = descricaoSituacaoReposta;
-    }
-    
-    public String getDescricaoSituacaoReposta() {
+	private static final Map<String, EnumDescricaoSituacaoResposta> constanteToEnum = new HashMap<String, EnumDescricaoSituacaoResposta>();
+	private static final Map<String, EnumDescricaoSituacaoResposta> situacaoToEnum = new HashMap<String, EnumDescricaoSituacaoResposta>();
+	private static final Map<String, EnumDescricaoSituacaoResposta> descricaoSituacaoToEnum = new HashMap<String, EnumDescricaoSituacaoResposta>();
+
+	EnumDescricaoSituacaoResposta(String situacaoResposta, String descricaoSituacaoReposta) {
+
+		this.situacaoReposta = situacaoResposta;
+		this.descricaoSituacaoReposta = descricaoSituacaoReposta;
+	}
+
+	public String getSituacaoReposta() {
+		return situacaoReposta;
+	}
+
+	public String getDescricaoSituacaoReposta() {
 		return descricaoSituacaoReposta;
 	}
-    
-    static {
 
-		for (EnumDescricaoSituacaoResposta descricoesSituacaoResposta : values())
-			constanteToEnum.put(descricoesSituacaoResposta.name(), descricoesSituacaoResposta);
+	static {
+
+		for (EnumDescricaoSituacaoResposta enumDescricaoSituacaoResposta : values())
+			constanteToEnum.put(enumDescricaoSituacaoResposta.name(), enumDescricaoSituacaoResposta);
 	}
-    
-    public static EnumDescricaoSituacaoResposta fromOrdinal(int id) {
+
+	static {
+
+		for (EnumDescricaoSituacaoResposta enumDescricaoSituacaoResposta : values())
+			situacaoToEnum.put(enumDescricaoSituacaoResposta.getSituacaoReposta(), enumDescricaoSituacaoResposta);
+	}
+
+	static {
+
+		for (EnumDescricaoSituacaoResposta enumDescricaoSituacaoResposta : values())
+			descricaoSituacaoToEnum.put(enumDescricaoSituacaoResposta.getDescricaoSituacaoReposta(), enumDescricaoSituacaoResposta);
+	}
+
+	public static EnumDescricaoSituacaoResposta fromOrdinal(int id) {
 
 		if (id < values().length)
 			return values()[id];
 
 		return null;
 	}
-    
-    public static EnumDescricaoSituacaoResposta fromConstante(String constanteEnum) {
-		
+
+	public static EnumDescricaoSituacaoResposta fromConstante(String constanteEnum) {
+
 		return constanteToEnum.get(constanteEnum);
 	}
-	
+
+	public static EnumDescricaoSituacaoResposta fromSituacaoResposta(String situacaoResposta) {
+
+		return situacaoToEnum.get(situacaoResposta);
+	}
+
+	public static EnumDescricaoSituacaoResposta fromDescricaoSituacaoResposta(String descricaoSituacaoResposta) {
+
+		return descricaoSituacaoToEnum.get(descricaoSituacaoResposta);
+	}
+
 }

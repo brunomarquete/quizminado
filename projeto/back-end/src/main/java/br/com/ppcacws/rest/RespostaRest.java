@@ -109,6 +109,20 @@ public class RespostaRest {
 	}
 	
 	@GET
+	@Path("/buscarRespostasPorQuestao/{idQuestao:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarRespostasPorQuestao(@PathParam("idQuestao") String idQuestao) {
+		
+		List<Resposta> listaRespostas = respostaRepository.getRespostasPorQuestao(Integer.parseInt(idQuestao));
+
+		List<RespostaVo> lista = RespostaVo.popularRespostas(listaRespostas);
+
+		GenericEntity<List<RespostaVo>> entity = new GenericEntity<List<RespostaVo>>(lista) {};
+		
+		return Response.ok(entity).build();
+	}
+	
+	@GET
 	@Path("/listarRespostas")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getListarRespostas() {

@@ -96,7 +96,7 @@
 		{
 			"description": "Buscar Questões por Disciplina e Nivel Aleatoriamente",
 			"method": "GET",
-			"href": "../quizminado/rest/questao/buscarQuestoesPorDisciplinaENivelRandom?idDisciplina={idDisciplina}&idNivel={idNivel}",
+			"href": "../quizminado/rest/questao/buscarQuestoesPorDisciplinaENivelRandom?idUsuario={idUsuario}&idDisciplina={idDisciplina}&idNivel={idNivel}",
 			"rel": "findAll",
 			"queryParams": "?idDisciplina={idDisciplina}&idNivel={idNivel}"
 		},
@@ -134,6 +134,12 @@
 			"description": "Listar Resposta Certa por Questão",
 			"method": "GET",
 			"href": "../quizminado/rest/resposta/buscarRespostaCertaPorQuestao/{idQuestao}",
+			"rel": "find"
+		},
+		{
+			"description": "Listar Resposta por Questão",
+			"method": "GET",
+			"href": "../quizminado/rest/resposta/buscarRespostasPorQuestao/{idQuestao}",
 			"rel": "find"
 		},
 		{

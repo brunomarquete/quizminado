@@ -60,7 +60,7 @@ public class RespostaVo {
 			questao = QuestaoVo.clone(resposta.getQuestao());
 			
 			lista.add(new RespostaVo(resposta.getIdResposta(), resposta.getDescricaoResposta(), resposta.getSituacaoResposta(), questao, 
-					EnumDescricaoSituacaoResposta.fromConstante(resposta.getSituacaoResposta()).getDescricaoSituacaoReposta()));
+					EnumDescricaoSituacaoResposta.fromSituacaoResposta(resposta.getSituacaoResposta()).getDescricaoSituacaoReposta()));
 		}
 		
 		return lista;
@@ -71,7 +71,7 @@ public class RespostaVo {
 		QuestaoVo questao = QuestaoVo.clone(respostaEntity.getQuestao());
 		
 		RespostaVo resposta = new RespostaVo(respostaEntity.getIdResposta(), respostaEntity.getDescricaoResposta(), respostaEntity.getSituacaoResposta(), 
-				questao, EnumDescricaoSituacaoResposta.fromConstante(respostaEntity.getSituacaoResposta()).getDescricaoSituacaoReposta());
+				questao, EnumDescricaoSituacaoResposta.fromSituacaoResposta(respostaEntity.getSituacaoResposta()).getDescricaoSituacaoReposta());
 		
 		return resposta;
 	}
