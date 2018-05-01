@@ -28,7 +28,7 @@ import br.com.ppcacws.repository.DisciplinaRepository;
 import br.com.ppcacws.repository.NivelRepository;
 import br.com.ppcacws.repository.QuestaoRepository;
 import br.com.ppcacws.repository.RespostaRepository;
-import br.com.ppcacws.service.QuestaoService;
+import br.com.ppcacws.service.JogarService;
 import br.com.ppcacws.vo.QuestaoVo;
 import br.com.ppcacws.vo.RespostaVo;
 
@@ -37,7 +37,7 @@ import br.com.ppcacws.vo.RespostaVo;
 public class QuestaoRest {
 
 	@Inject
-	private QuestaoService questaoService;
+	private JogarService jogarService;
 	
 	private final QuestaoRepository questaoRepository = new QuestaoRepository();
 	private final RespostaRepository respostaRepository = new RespostaRepository();
@@ -95,15 +95,68 @@ public class QuestaoRest {
 	}
 	
 	@GET
+	@Path("/buscarQuestaoPorDisciplinaENivelRandom")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarQuestaoPorDisciplinaENivelRandom(
+			@QueryParam("idDisciplina") String idDisciplina, @QueryParam("idNivel") String idNivel) {
+		
+		JSONObject json = null;
+		
+		Map<String, String> response = new HashMap<String, String>();
+		
+		QuestaoVo questao = null;
+		
+		GenericEntity<QuestaoVo> entity = null;
+		
+		try {
+			
+			Questao questaoEntity = questaoRepository.buscarQuestaoPorDisciplinaENivelRandom(
+					Integer.parseInt(idDisciplina), Integer.parseInt(idNivel));
+			
+			questao = QuestaoVo.clone(questaoEntity);
+			
+			entity = new GenericEntity<QuestaoVo>(questao) {};
+			
+			return Response.ok(entity).build();
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			response.put("Mensagem", "Nenhuma Questão encontrada!");
+			
+			json = new JSONObject(response);
+			
+			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+		}
+	}
+	
+	@GET
 	@Path("/buscarQuestoesPorDisciplinaENivelRandom")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscarQuestoesPorDisciplinaENivelRandom(@QueryParam("idUsuario") String idUsuario,
+	public Response buscarQuestoesPorDisciplinaENivelRandom(
 			@QueryParam("idDisciplina") String idDisciplina, @QueryParam("idNivel") String idNivel) {
 
 		List<Questao> listaQuestoes = questaoRepository.
 				buscarQuestoesPorDisciplinaENivelRandom(Integer.parseInt(idDisciplina), Integer.parseInt(idNivel));
 		
-		List<Questao> listaQuestoesDisponiveis = questaoService.removerQuestoesRespondidas(listaQuestoes, idUsuario);
+		List<QuestaoVo> lista = QuestaoVo.popularQuestoes(listaQuestoes);
+
+		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
+		
+		return Response.ok(entity).build();
+	}
+	
+	@GET
+	@Path("/buscarQuestoesPorUsuarioDisciplinaENivelRandom")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarQuestoesPorUsuarioDisciplinaENivelRandom(@QueryParam("idUsuario") String idUsuario,
+			@QueryParam("idDisciplina") String idDisciplina, @QueryParam("idNivel") String idNivel) {
+
+		List<Questao> listaQuestoes = questaoRepository.
+				buscarQuestoesPorDisciplinaENivelRandom(Integer.parseInt(idDisciplina), Integer.parseInt(idNivel));
+		
+		List<Questao> listaQuestoesDisponiveis = jogarService.removerQuestoesRespondidas(listaQuestoes, idUsuario);
 
 		List<QuestaoVo> lista = QuestaoVo.popularQuestoes(listaQuestoesDisponiveis);
 
@@ -115,8 +168,7 @@ public class QuestaoRest {
 	@GET
 	@Path("/responderQuestao")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response responderQuestao(@QueryParam("idUsuario") String idUsuario, 
-			@QueryParam("idQuestao") String idQuestao, @QueryParam("idResposta") String idResposta) {
+	public Response responderQuestao(@QueryParam("idQuestao") String idQuestao, @QueryParam("letraResposta") String letraResposta) {
 		
 		JSONObject json = null;
 		
@@ -130,9 +182,49 @@ public class QuestaoRest {
 			
 			questao = QuestaoVo.clone(questaoRepository.getQuestao(Integer.parseInt(idQuestao)));
 			
-			resposta = RespostaVo.clone(respostaRepository.getResposta(Integer.parseInt(idResposta)));
+			resposta = RespostaVo.clone(respostaRepository.getRespostaPorLetra(Integer.parseInt(idQuestao), letraResposta));
 			
-			EnumDescricaoSituacaoResposta situacaoResposta = questaoService.responderQuestao(idUsuario, questao, resposta);
+			EnumDescricaoSituacaoResposta situacaoResposta = jogarService.responderQuestao(questao, resposta);
+			
+			response.put("Mensagem", situacaoResposta.getDescricaoSituacaoReposta());
+			
+			json = new JSONObject(response);
+			
+			return Response.status(Response.Status.OK).entity(json).build();
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			response.put("Mensagem", "Não foi possível responder a Questão Id: " + idQuestao);
+			
+			json = new JSONObject(response);
+			
+			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+		}
+	}
+	
+	@GET
+	@Path("/responderQuestaoPorUsuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response responderQuestaoPorUsuario(@QueryParam("idUsuario") String idUsuario, 
+			@QueryParam("idQuestao") String idQuestao, @QueryParam("letraResposta") String letraResposta) {
+		
+		JSONObject json = null;
+		
+		Map<String, String> response = new HashMap<String, String>();
+		
+		QuestaoVo questao = null;
+		
+		RespostaVo resposta = null;
+		
+		try {
+			
+			questao = QuestaoVo.clone(questaoRepository.getQuestao(Integer.parseInt(idQuestao)));
+			
+			resposta = RespostaVo.clone(respostaRepository.getRespostaPorLetra(Integer.parseInt(idQuestao), letraResposta));
+			
+			EnumDescricaoSituacaoResposta situacaoResposta = jogarService.responderQuestaoPorUsuario(idUsuario, questao, resposta);
 			
 			response.put("Mensagem", situacaoResposta.getDescricaoSituacaoReposta());
 			

@@ -14,22 +14,42 @@ import br.com.ppcacws.repository.RespostaRepository;
 import br.com.ppcacws.vo.QuestaoVo;
 import br.com.ppcacws.vo.RespostaVo;
 
-@Named("questaoService")
+@Named("jogarService")
 @RequestScoped
-public class QuestaoService {
+public class JogarService {
 	
 	private final RespostaRepository respostaRepository = new RespostaRepository();
 	
-	private Map<String, QuestaoVo> mapaRespostaQuestoes = new HashMap<String, QuestaoVo>();
+	private Map<String, QuestaoVo> mapaRespostaQuestoes;
 	
 	
-	public EnumDescricaoSituacaoResposta responderQuestao(String idUsuario, QuestaoVo questao, RespostaVo respostaUsuario) {
+	public EnumDescricaoSituacaoResposta responderQuestao(QuestaoVo questao, RespostaVo respostaUsuario) {
 		
 		RespostaVo respostaCerta = null;
 		
 		try {
 			
-			mapaRespostaQuestoes.put(this.getChaveUsuarioQuestao(idUsuario, questao.getIdQuestao()), questao);
+			respostaCerta = RespostaVo.clone(respostaRepository.getRespostaCertaPorQuestao(questao.getIdQuestao()));
+			
+			return (respostaCerta.getDescricaoSituacaoResposta().equals(respostaUsuario.getDescricaoSituacaoResposta()) 
+					? EnumDescricaoSituacaoResposta.CERTO : EnumDescricaoSituacaoResposta.ERRADO);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	public EnumDescricaoSituacaoResposta responderQuestaoPorUsuario(String idUsuario, QuestaoVo questao, RespostaVo respostaUsuario) {
+		
+		RespostaVo respostaCerta = null;
+		
+		try {
+			
+			this.getMapaRespostaQuestoes().put(this.getChaveUsuarioQuestao(idUsuario, questao.getIdQuestao()), questao);
 		
 			respostaCerta = RespostaVo.clone(respostaRepository.getRespostaCertaPorQuestao(questao.getIdQuestao()));
 			
@@ -75,7 +95,9 @@ public class QuestaoService {
 	}
 	
 	public Map<String, QuestaoVo> getMapaRespostaQuestoes() {
-		
+		if(mapaRespostaQuestoes == null) {
+			mapaRespostaQuestoes = new HashMap<String, QuestaoVo>();
+		}
 		return mapaRespostaQuestoes;
 	}
 	

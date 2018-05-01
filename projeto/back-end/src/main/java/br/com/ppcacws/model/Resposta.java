@@ -23,6 +23,9 @@ public class Resposta {
 	@Column(name = "st_resposta", columnDefinition = "CHAR", length = 1)
 	private String situacaoResposta;
 	
+	@Column(name = "lt_resposta", columnDefinition = "CHAR", length = 1)
+	private String letraResposta;
+	
 	@ManyToOne
 	@JoinColumn(name="id_questao")
 	private Questao questao;
@@ -33,10 +36,11 @@ public class Resposta {
 	}
 	
 	public Resposta(String descricaoResposta, String situacaoResposta, 
-			Questao questao) {
+			String letraResposta, Questao questao) {
 		super();
 		this.descricaoResposta = descricaoResposta;
 		this.situacaoResposta = situacaoResposta;
+		this.letraResposta = letraResposta;
 		this.questao = questao;
 	}
 
@@ -60,6 +64,13 @@ public class Resposta {
 	}
 	public void setSituacaoResposta(String situacaoResposta) {
 		this.situacaoResposta = situacaoResposta;
+	}
+	
+	public String getLetraResposta() {
+		return letraResposta;
+	}
+	public void setLetraResposta(String letraResposta) {
+		this.letraResposta = letraResposta;
 	}
 
 	public Questao getQuestao() {

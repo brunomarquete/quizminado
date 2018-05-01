@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,16 +23,12 @@ import org.codehaus.jettison.json.JSONObject;
 import br.com.ppcacws.model.Resposta;
 import br.com.ppcacws.repository.QuestaoRepository;
 import br.com.ppcacws.repository.RespostaRepository;
-import br.com.ppcacws.service.RespostaService;
 import br.com.ppcacws.vo.RespostaVo;
 
 @Path("/resposta")
 @RequestScoped
 public class RespostaRest {
 
-	@Inject
-	private RespostaService respostaService;
-	
 	private final RespostaRepository respostaRepository = new RespostaRepository();
 	private final QuestaoRepository questaoRepository = new QuestaoRepository();
 
@@ -150,8 +145,8 @@ public class RespostaRest {
 		
 		try {
 			
-			respostaEntity = new Resposta(resposta.getDescricaoResposta(), 
-					resposta.getSituacaoResposta(), questaoRepository.getQuestao(resposta.getIdQuestao()));
+			respostaEntity = new Resposta(resposta.getDescricaoResposta(), resposta.getSituacaoResposta(),
+					resposta.getLetraResposta(), questaoRepository.getQuestao(resposta.getIdQuestao()));
 
 			boolean sucesso = respostaRepository.salvar(respostaEntity);
 

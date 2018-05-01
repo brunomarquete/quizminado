@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.ppcacws.enumeration.EnumDescricaoSituacaoResposta;
 import br.com.ppcacws.model.Questao;
+import br.com.ppcacws.model.Resposta;
 
 @XmlRootElement(name = "questao")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -22,6 +24,9 @@ public class QuestaoVo {
 	private Integer idNivel;
 	private NivelVo nivel;
 	
+	//@XmlTransient
+	private List<RespostaVo> respostas;
+	
 	
 	public QuestaoVo() {
 		
@@ -31,7 +36,9 @@ public class QuestaoVo {
 			NivelVo nivel) {
 		this.descricaoQuestao = descricaoQuestao;
 		this.disciplina = disciplina;
+		this.idDisciplina = disciplina.getIdDisciplina();
 		this.nivel = nivel;
+		this.idNivel = nivel.getIdNivel();
 	}
 	
 	public QuestaoVo(Integer idQuestao, String descricaoQuestao, 
@@ -39,7 +46,9 @@ public class QuestaoVo {
 		this.idQuestao = idQuestao;
 		this.descricaoQuestao = descricaoQuestao;
 		this.disciplina = disciplina;
+		this.idDisciplina = disciplina.getIdDisciplina();
 		this.nivel = nivel;
+		this.idNivel = nivel.getIdNivel();
 	}
 	
 	
@@ -51,13 +60,29 @@ public class QuestaoVo {
 		
 		NivelVo nivel = null;
 		
-		for(Questao questao : listaQuestoes) {
+		QuestaoVo questao = null;
+		
+		RespostaVo resposta = null;
+		
+		for(Questao questaoEntity : listaQuestoes) {
 			
-			disciplina = DisciplinaVo.clone(questao.getDisciplina());
+			disciplina = DisciplinaVo.clone(questaoEntity.getDisciplina());
 			
-			nivel = NivelVo.clone(questao.getNivel());
+			nivel = NivelVo.clone(questaoEntity.getNivel());
 			
-			lista.add(new QuestaoVo(questao.getIdQuestao(), questao.getDescricaoQuestao(), disciplina, nivel));
+			questao = new QuestaoVo(questaoEntity.getIdQuestao(), questaoEntity.getDescricaoQuestao(), disciplina, nivel);
+			
+			for(Resposta respostaEntity : questaoEntity.getRespostas()) {
+				
+				resposta = new RespostaVo(respostaEntity.getIdResposta(), respostaEntity.getDescricaoResposta(), 
+						respostaEntity.getSituacaoResposta(), questao, 
+						EnumDescricaoSituacaoResposta.fromSituacaoResposta(respostaEntity.getSituacaoResposta()).getDescricaoSituacaoReposta(),
+						respostaEntity.getLetraResposta());
+				
+				questao.getRespostas().add(resposta);
+			}
+			
+			lista.add(questao);
 		}
 		
 		return lista;
@@ -70,6 +95,18 @@ public class QuestaoVo {
 		NivelVo nivel = NivelVo.clone(questaoEntity.getNivel());
 		
 		QuestaoVo questao = new QuestaoVo(questaoEntity.getIdQuestao(), questaoEntity.getDescricaoQuestao(), disciplina, nivel);
+		
+		RespostaVo resposta = null;
+		
+		for(Resposta respostaEntity : questaoEntity.getRespostas()) {
+			
+			resposta = new RespostaVo(respostaEntity.getIdResposta(), respostaEntity.getDescricaoResposta(), 
+					respostaEntity.getSituacaoResposta(), questao, 
+					EnumDescricaoSituacaoResposta.fromSituacaoResposta(respostaEntity.getSituacaoResposta()).getDescricaoSituacaoReposta(),
+					respostaEntity.getLetraResposta());
+			
+			questao.getRespostas().add(resposta);
+		}
 		
 		return questao;
 	}
@@ -115,6 +152,16 @@ public class QuestaoVo {
 	}
 	public void setNivel(NivelVo nivel) {
 		this.nivel = nivel;
+	}
+	
+	public List<RespostaVo> getRespostas() {
+		if(respostas == null) {
+			respostas = new ArrayList<RespostaVo>();
+		}
+		return respostas;
+	}
+	public void setRespostas(List<RespostaVo> respostas) {
+		this.respostas = respostas;
 	}
 	
 }

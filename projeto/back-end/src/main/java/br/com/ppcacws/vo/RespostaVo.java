@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.ppcacws.enumeration.EnumDescricaoSituacaoResposta;
 import br.com.ppcacws.model.Resposta;
@@ -17,9 +18,11 @@ public class RespostaVo {
 	private Integer idResposta;
 	private String descricaoResposta;
 	private String situacaoResposta;
+	private String letraResposta;
 	private String descricaoSituacaoResposta;
 	
 	private Integer idQuestao;
+	@XmlTransient
 	private QuestaoVo questao;
 	
 	
@@ -29,24 +32,27 @@ public class RespostaVo {
 	
 	public RespostaVo(String descricaoResposta, String situacaoResposta, 
 			Integer idQuestao, QuestaoVo questao, 
-			String descricaoSituacaoResposta) {
+			String descricaoSituacaoResposta, String letraResposta) {
 		super();
 		this.descricaoResposta = descricaoResposta;
 		this.situacaoResposta = situacaoResposta;
 		this.idQuestao = idQuestao;
 		this.questao = questao;
 		this.descricaoSituacaoResposta = descricaoSituacaoResposta;
+		this.letraResposta = letraResposta;
 	}
 	
 	public RespostaVo(Integer idResposta, String descricaoResposta, 
 			String situacaoResposta, QuestaoVo questao,
-			String descricaoSituacaoResposta) {
+			String descricaoSituacaoResposta, String letraResposta) {
 		super();
 		this.idResposta = idResposta;
 		this.descricaoResposta = descricaoResposta;
 		this.situacaoResposta = situacaoResposta;
+		this.idQuestao = questao.getIdQuestao();
 		this.questao = questao;
 		this.descricaoSituacaoResposta = descricaoSituacaoResposta;
+		this.letraResposta = letraResposta;
 	}
 
 	public static List<RespostaVo> popularRespostas(List<Resposta> listaRespostas) {
@@ -60,7 +66,7 @@ public class RespostaVo {
 			questao = QuestaoVo.clone(resposta.getQuestao());
 			
 			lista.add(new RespostaVo(resposta.getIdResposta(), resposta.getDescricaoResposta(), resposta.getSituacaoResposta(), questao, 
-					EnumDescricaoSituacaoResposta.fromSituacaoResposta(resposta.getSituacaoResposta()).getDescricaoSituacaoReposta()));
+					EnumDescricaoSituacaoResposta.fromSituacaoResposta(resposta.getSituacaoResposta()).getDescricaoSituacaoReposta(), resposta.getLetraResposta()));
 		}
 		
 		return lista;
@@ -71,7 +77,7 @@ public class RespostaVo {
 		QuestaoVo questao = QuestaoVo.clone(respostaEntity.getQuestao());
 		
 		RespostaVo resposta = new RespostaVo(respostaEntity.getIdResposta(), respostaEntity.getDescricaoResposta(), respostaEntity.getSituacaoResposta(), 
-				questao, EnumDescricaoSituacaoResposta.fromSituacaoResposta(respostaEntity.getSituacaoResposta()).getDescricaoSituacaoReposta());
+				questao, EnumDescricaoSituacaoResposta.fromSituacaoResposta(respostaEntity.getSituacaoResposta()).getDescricaoSituacaoReposta(), respostaEntity.getLetraResposta());
 		
 		return resposta;
 	}
@@ -96,6 +102,13 @@ public class RespostaVo {
 	}
 	public void setSituacaoResposta(String situacaoResposta) {
 		this.situacaoResposta = situacaoResposta;
+	}
+	
+	public String getLetraResposta() {
+		return letraResposta;
+	}
+	public void setLetraResposta(String letraResposta) {
+		this.letraResposta = letraResposta;
 	}
 	
 	public Integer getIdResposta() {

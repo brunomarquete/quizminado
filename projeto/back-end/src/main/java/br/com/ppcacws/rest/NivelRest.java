@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,16 +22,12 @@ import org.codehaus.jettison.json.JSONObject;
 
 import br.com.ppcacws.model.Nivel;
 import br.com.ppcacws.repository.NivelRepository;
-import br.com.ppcacws.service.NivelService;
 import br.com.ppcacws.vo.NivelVo;
 
 @Path("/nivel")
 @RequestScoped
 public class NivelRest {
 
-	@Inject
-	private NivelService nivelService;
-	
 	private final NivelRepository nivelRepository = new NivelRepository();
 
 

@@ -57,6 +57,7 @@ CREATE TABLE `tb_resposta` (
   `id_resposta` int(11) NOT NULL AUTO_INCREMENT,
   `ds_resposta` varchar(500) NOT NULL,
   `st_resposta` char(1) NOT NULL,
+  `lt_resposta` char(1) NOT NULL,
   `id_questao` int(11) NOT NULL,
   PRIMARY KEY (`id_resposta`),
   KEY `fk_questao_resposa` (`id_questao`),

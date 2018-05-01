@@ -1,12 +1,16 @@
 package br.com.ppcacws.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +31,9 @@ public class Questao {
 	@ManyToOne
 	@JoinColumn(name="id_nivel")
 	private Nivel nivel;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "questao")
+	private List<Resposta> respostas;
 	
 	
 	public Questao() {
@@ -73,6 +80,13 @@ public class Questao {
 	}
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;
+	}
+	
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
 	}
 	
 

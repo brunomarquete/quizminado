@@ -94,11 +94,39 @@
 			"rel": "findAll"
 		},
 		{
-			"description": "Buscar Questões por Disciplina e Nivel Aleatoriamente",
+			"description": "Buscar Questão por Disciplina e Nivel Aleatoriamente",
 			"method": "GET",
-			"href": "../quizminado/rest/questao/buscarQuestoesPorDisciplinaENivelRandom?idUsuario={idUsuario}&idDisciplina={idDisciplina}&idNivel={idNivel}",
+			"href": "../quizminado/rest/questao/buscarQuestaoPorDisciplinaENivelRandom?idDisciplina={idDisciplina}&idNivel={idNivel}",
 			"rel": "findAll",
 			"queryParams": "?idDisciplina={idDisciplina}&idNivel={idNivel}"
+		},
+		{
+			"description": "Buscar Questões por Disciplina e Nivel Aleatoriamente",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/buscarQuestoesPorDisciplinaENivelRandom?idDisciplina={idDisciplina}&idNivel={idNivel}",
+			"rel": "findAll",
+			"queryParams": "?idDisciplina={idDisciplina}&idNivel={idNivel}"
+		},
+		{
+			"description": "Buscar Questões por Usuario, Disciplina e Nivel Aleatoriamente",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/buscarQuestoesPorUsuarioDisciplinaENivelRandom?idUsuario={idUsuario}&idDisciplina={idDisciplina}&idNivel={idNivel}",
+			"rel": "findAll",
+			"queryParams": "?idUsuario={idUsuario}&idDisciplina={idDisciplina}&idNivel={idNivel}"
+		},
+		{
+			"description": "Responder Questão por Disciplina e Nivel",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/responderQuestao?idQuestao={idQuestao}&letraResposta={letraResposta}",
+			"rel": "findAll",
+			"queryParams": "?idQuestao={idQuestao}&letraResposta={letraResposta}"
+		},
+		{
+			"description": "Responder Questão por Usuario, Disciplina e Nivel",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/responderQuestaoPorUsuario?idUsuario={idUsuario}&idQuestao={idQuestao}&letraResposta={letraResposta}",
+			"rel": "findAll",
+			"queryParams": "?idUsuario={idUsuario}&idQuestao={idQuestao}&letraResposta={letraResposta}"
 		},
 		{
 			"description": "Cadastrar Questão",
@@ -154,7 +182,7 @@
 			"href": "../quizminado/rest/resposta/cadastrarResposta",
 			"rel": "persist",
 			"content-type": "application/json",
-			"payload": "{"descricaoResposta":"resposta", "situacaoResposta":"situacao", "idQuestao":"id"}"
+			"payload": "{"descricaoResposta":"resposta", "situacaoResposta":"situacao", "letraResposta":"letra", "idQuestao":"id"}"
 		},
 		{
 			"description": "Alterar Resposta",
@@ -162,7 +190,7 @@
 			"href": "../quizminado/rest/resposta/alterarResposta",
 			"rel": "merge",
 			"content-type": "application/json",
-			"payload": "{"idResposta":"id", "descricaoResposta":"descricao", "situacaoResposta":"situacao", "idQuestao":"id"}"
+			"payload": "{"idResposta":"id", "descricaoResposta":"descricao", "situacaoResposta":"situacao", "letraResposta":"letra", "idQuestao":"id"}"
 		},
 		{
 			"description": "Deletar Resposta por Id",

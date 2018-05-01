@@ -40,6 +40,38 @@ public class RespostaRepository {
 
 		return resposta;
 	}
+	
+	public Resposta getRespostaPorLetra(Integer codigoQuestao, String letraResposta) {
+
+		Resposta resposta = null;
+
+		try {
+			
+			StringBuilder queryBuilder = new StringBuilder();
+			
+			queryBuilder.append(" SELECT r FROM Resposta r ");
+			
+			queryBuilder.append(" 	INNER JOIN r.questao q ");
+			
+			queryBuilder.append(" WHERE q.idQuestao = :P_CODIGO_QUESTAO ");
+			
+			queryBuilder.append(" 	AND r.letraResposta = :P_LETRA_RESPOSTA ");
+
+			Query query = this.entityManager.createQuery(queryBuilder.toString());
+			
+			query.setParameter("P_CODIGO_QUESTAO", codigoQuestao);
+			
+			query.setParameter("P_LETRA_RESPOSTA", letraResposta);
+			
+			resposta = (Resposta) query.getSingleResult();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return resposta;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Resposta> listarRespostas() {
@@ -104,6 +136,8 @@ public class RespostaRepository {
 			queryBuilder.append(" 	INNER JOIN r.questao q ");
 			
 			queryBuilder.append(" WHERE q.idQuestao = :P_CODIGO_QUESTAO ");
+			
+			queryBuilder.append(" ORDER BY r.letraResposta ASC ");
 
 			Query query = this.entityManager.createQuery(queryBuilder.toString());
 			

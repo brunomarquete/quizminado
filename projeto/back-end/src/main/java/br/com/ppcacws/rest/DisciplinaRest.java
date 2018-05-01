@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,15 +22,11 @@ import org.codehaus.jettison.json.JSONObject;
 
 import br.com.ppcacws.model.Disciplina;
 import br.com.ppcacws.repository.DisciplinaRepository;
-import br.com.ppcacws.service.DisciplinaService;
 import br.com.ppcacws.vo.DisciplinaVo;
 
 @Path("/disciplina")
 @RequestScoped
 public class DisciplinaRest {
-
-	@Inject
-	private DisciplinaService disciplinaService;
 
 	private final DisciplinaRepository disciplinaRepository = new DisciplinaRepository();
 
@@ -250,7 +245,7 @@ public class DisciplinaRest {
 	/**
 	 * EXEMPLOS COM CDI
 	 */
-	@GET
+	/*@GET
 	@Path("/getListaDisciplinas")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getListaDisciplinas() {
@@ -262,10 +257,10 @@ public class DisciplinaRest {
 		GenericEntity<List<DisciplinaVo>> entity = new GenericEntity<List<DisciplinaVo>>(lista) {};
 
 		return Response.ok(entity).build();
-	}
+	}*/
 
 	// NÃO SALVA NO BANCO
-	@POST
+	/*@POST
 	@Path("/salvarDisciplina/post")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -278,6 +273,6 @@ public class DisciplinaRest {
 		String output = "OK!";
 
 		return Response.status(200).entity(output).build();
-	}
+	}*/
 
 }
