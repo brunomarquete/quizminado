@@ -4,7 +4,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from "rxjs/Observable";
 import { Entidade } from "../../models/entidade.model";
-import { Pergunta } from "../../models/pergunta.model";
 import { Environment } from "../../environments/environment";
 
 @Injectable()
@@ -14,9 +13,7 @@ export abstract class BaseService<T extends Entidade> {
 
     path: string
 
-    http: Http
-
-    constructor(path: string, http: Http) {
+    constructor(path: string, private http: Http) {
 
         this.api = Environment.api
 
@@ -63,15 +60,9 @@ export abstract class BaseService<T extends Entidade> {
         return this.http.get(this.url(`/obter/${id}`), this.config()).map(this.mapper)
     }
 
-    inativar(id: number): Observable<any> {
+    excluir(id: number): Observable<any> {
 
         return this.http.post(this.url(`/excluir/${id}`), null, this.config()).map(this.mapper)
-    }
-
-    ativar(entidade: T): Observable<any> {
-
-        return this.http.post(this.url('/ativar'), JSON.stringify(entidade), this.config()).map(this.mapper)
-        
     }
 
     salvar(entidade: T): Observable<any> {

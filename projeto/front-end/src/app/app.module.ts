@@ -21,6 +21,8 @@ import { LoginPageModule } from '../pages/login/login.module';
 import { LoginEmailPageModule } from '../pages/login-email/login-email.module';
 import { CadastroEmailPageModule } from '../pages/cadastro-email/cadastro-email.module';
 import { ResetarSenhaPageModule } from '../pages/resetar-senha/resetar-senha.module';
+import { DisciplinaService } from '../providers/disciplina/disciplina.service';
+import { HttpModule } from '@angular/http';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcQMH4HuA9U0uXTXRhFriPK7ni_gvHVeA",
@@ -45,7 +47,8 @@ const firebaseConfig = {
     LoginPageModule,
     LoginEmailPageModule,
     CadastroEmailPageModule,
-    ResetarSenhaPageModule
+    ResetarSenhaPageModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -59,7 +62,8 @@ const firebaseConfig = {
     AuthService,
     GooglePlus,
     Facebook,
-    TwitterConnect
+    TwitterConnect,
+    DisciplinaService
   ]
 })
 export class AppModule {}

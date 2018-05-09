@@ -35,7 +35,7 @@ public class DisciplinaRest {
 	 * EXEMPLOS SEM CDI
 	 */
 	@GET
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/obter/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarDisciplinaPorId(@PathParam("id") String id) {
 
@@ -70,7 +70,7 @@ public class DisciplinaRest {
 	}
 
 	@GET
-	@Path("/listarDisciplinas")
+	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getListarDisciplinas() {
 
@@ -84,7 +84,7 @@ public class DisciplinaRest {
 	}
 
 	@POST
-	@Path("/cadastrarDisciplina")
+	@Path("/salvar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrarDisciplina(DisciplinaVo disciplina) {
@@ -130,7 +130,7 @@ public class DisciplinaRest {
 	}
 
 	@PUT
-	@Path("/alterarDisciplina")
+	@Path("/alterar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response alterarDisciplina(DisciplinaVo disciplina) {
@@ -189,7 +189,7 @@ public class DisciplinaRest {
 	}
 
 	@DELETE
-	@Path("/deletarDisciplina/{id:[0-9][0-9]*}")
+	@Path("/excluir/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deletarDisciplinaPorId(@PathParam("id") String id) {
 

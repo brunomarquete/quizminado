@@ -2,5 +2,5 @@ export const environment = {
 
     production: true,
 
-    api: 'api/fpe/',
+    api: 'quizminado/rest/',
 };
