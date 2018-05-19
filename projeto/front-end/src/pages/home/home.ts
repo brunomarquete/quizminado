@@ -21,7 +21,8 @@ export class HomePage {
   listarDisciplinas() {
      this.disciplinaService.listar().subscribe(
        disciplinas => this.disciplinas = disciplinas
-    );
+     );
+
   }
 
   signOut() {

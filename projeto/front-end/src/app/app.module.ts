@@ -23,6 +23,7 @@ import { CadastroEmailPageModule } from '../pages/cadastro-email/cadastro-email.
 import { ResetarSenhaPageModule } from '../pages/resetar-senha/resetar-senha.module';
 import { DisciplinaService } from '../providers/disciplina/disciplina.service';
 import { HttpModule } from '@angular/http';
+import { QuestaoProvider } from '../providers/questao/questao';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcQMH4HuA9U0uXTXRhFriPK7ni_gvHVeA",
@@ -63,7 +64,8 @@ const firebaseConfig = {
     GooglePlus,
     Facebook,
     TwitterConnect,
-    DisciplinaService
+    DisciplinaService,
+    QuestaoProvider
   ]
 })
 export class AppModule {}

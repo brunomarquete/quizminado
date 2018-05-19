@@ -13,7 +13,9 @@ export abstract class BaseService<T extends Entidade> {
 
     path: string
 
-    constructor(path: string, private http: Http) {
+    http: Http;
+
+    constructor(path: string, http: Http) {
 
         this.api = Environment.api
 

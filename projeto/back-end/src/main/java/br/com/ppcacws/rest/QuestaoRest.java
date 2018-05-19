@@ -46,7 +46,7 @@ public class QuestaoRest {
 
 
 	@GET
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/obter/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarQuestaoPorId(@PathParam("id") String id) {
 		
@@ -81,7 +81,7 @@ public class QuestaoRest {
 	}
 	
 	@GET
-	@Path("/listarQuestoes")
+	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getListarQuestoes() {
 
@@ -92,6 +92,171 @@ public class QuestaoRest {
 		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
 		
 		return Response.ok(entity).build();
+	}
+	
+	@POST
+	@Path("/salvar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cadastrarQuestao(QuestaoVo questao) {
+
+		JSONObject json = null;
+
+		Map<String, String> response = new HashMap<String, String>();
+
+		Questao questaoEntity = null;
+		
+		try {
+			
+			questaoEntity = new Questao(questao.getDescricaoQuestao(), 
+					disciplinaRepository.getDisciplina(questao.getIdDisciplina()),
+							nivelRepository.getNivel(questao.getIdNivel()));
+
+			boolean sucesso = questaoRepository.salvar(questaoEntity);
+
+			if(sucesso) {
+
+				response.put("Mensagem", "A Questão " + questao.getDescricaoQuestao() + " foi cadastrada com sucesso. "
+						+ "URI Json: ../quizminado/rest/questao/cadastrarQuestao");
+
+				json = new JSONObject(response);
+
+				return Response.status(Response.Status.OK).entity(json).build();
+
+			} else {
+
+				response.put("Mensagem", "Erro ao cadastrar a Questão: " + questao.getDescricaoQuestao());
+
+				json = new JSONObject(response);
+
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			response.put("Mensagem", "Erro ao cadastrar a Questão: " + questao.getDescricaoQuestao());
+
+			json = new JSONObject(response);
+
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+		}
+	}
+	
+	@PUT
+	@Path("/alterar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response alterarQuestao(QuestaoVo questao) {
+
+		JSONObject json = null;
+
+		Map<String, String> response = new HashMap<String, String>();
+
+		Questao questaoEntity = null;
+
+		String descricaoQuestao = null;
+
+		try {
+
+			questaoEntity = questaoRepository.getQuestao(questao.getIdQuestao());
+			
+			if(questaoEntity == null) {
+
+				throw new Exception();
+			}
+			
+			descricaoQuestao = questaoEntity.getDescricaoQuestao();
+
+			PropertyUtils.copyProperties(questaoEntity, questao);
+			
+			questaoEntity.setDisciplina(disciplinaRepository.getDisciplina(questao.getIdDisciplina()));
+			questaoEntity.setNivel(nivelRepository.getNivel(questao.getIdNivel()));
+
+			boolean sucesso = questaoRepository.alterar(questaoEntity);
+
+			if(sucesso) {
+
+				response.put("Mensagem", "A Questão " + descricaoQuestao + " foi alterada para " 
+						+ questaoEntity.getDescricaoQuestao() + ". URI Json: ../quizminado/rest/questao/alterarQuestao");
+
+				json = new JSONObject(response);
+
+				return Response.status(Response.Status.OK).entity(json).build();
+
+			} else {
+
+				response.put("Mensagem", "Erro ao alterar a Questão Id: " + questao.getIdQuestao());
+
+				json = new JSONObject(response);
+
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			response.put("Mensagem", "Erro ao alterar a Questão Id: " + questao.getIdQuestao());
+
+			json = new JSONObject(response);
+
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+		}
+	}
+	
+	@DELETE
+	@Path("/excluir/{id:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deletarQuestaoPorId(@PathParam("id") String id) {
+
+		JSONObject json = null;
+
+		Map<String, String> response = new HashMap<String, String>();
+
+		String descricaoQuestaoRemovida = null;
+
+		try {
+
+			Questao questaoEntity = questaoRepository.getQuestao(Integer.parseInt(id));
+
+			if(questaoEntity == null) {
+
+				throw new Exception();
+			}
+
+			descricaoQuestaoRemovida = questaoEntity.getDescricaoQuestao();
+
+			boolean sucesso = questaoRepository.excluir(questaoEntity);
+
+			if(sucesso) {
+
+				response.put("Mensagem", "Questão " + descricaoQuestaoRemovida + " removida com sucesso.");
+
+				json = new JSONObject(response);
+
+				return Response.ok(json).build();
+
+			} else {
+
+				response.put("Mensagem", "Não foi possível remover a Questão Id: " + id);
+
+				json = new JSONObject(response);
+
+				return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			response.put("Mensagem", "Nenhuma Questão encontrada para o Id: " + id);
+
+			json = new JSONObject(response);
+
+			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+		}
 	}
 	
 	@GET
@@ -240,171 +405,6 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
-		}
-	}
-
-	@POST
-	@Path("/cadastrarQuestao")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response cadastrarQuestao(QuestaoVo questao) {
-
-		JSONObject json = null;
-
-		Map<String, String> response = new HashMap<String, String>();
-
-		Questao questaoEntity = null;
-		
-		try {
-			
-			questaoEntity = new Questao(questao.getDescricaoQuestao(), 
-					disciplinaRepository.getDisciplina(questao.getIdDisciplina()),
-							nivelRepository.getNivel(questao.getIdNivel()));
-
-			boolean sucesso = questaoRepository.salvar(questaoEntity);
-
-			if(sucesso) {
-
-				response.put("Mensagem", "A Questão " + questao.getDescricaoQuestao() + " foi cadastrada com sucesso. "
-						+ "URI Json: ../quizminado/rest/questao/cadastrarQuestao");
-
-				json = new JSONObject(response);
-
-				return Response.status(Response.Status.OK).entity(json).build();
-
-			} else {
-
-				response.put("Mensagem", "Erro ao cadastrar a Questão: " + questao.getDescricaoQuestao());
-
-				json = new JSONObject(response);
-
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-			response.put("Mensagem", "Erro ao cadastrar a Questão: " + questao.getDescricaoQuestao());
-
-			json = new JSONObject(response);
-
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
-		}
-	}
-	
-	@PUT
-	@Path("/alterarQuestao")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response alterarQuestao(QuestaoVo questao) {
-
-		JSONObject json = null;
-
-		Map<String, String> response = new HashMap<String, String>();
-
-		Questao questaoEntity = null;
-
-		String descricaoQuestao = null;
-
-		try {
-
-			questaoEntity = questaoRepository.getQuestao(questao.getIdQuestao());
-			
-			if(questaoEntity == null) {
-
-				throw new Exception();
-			}
-			
-			descricaoQuestao = questaoEntity.getDescricaoQuestao();
-
-			PropertyUtils.copyProperties(questaoEntity, questao);
-			
-			questaoEntity.setDisciplina(disciplinaRepository.getDisciplina(questao.getIdDisciplina()));
-			questaoEntity.setNivel(nivelRepository.getNivel(questao.getIdNivel()));
-
-			boolean sucesso = questaoRepository.alterar(questaoEntity);
-
-			if(sucesso) {
-
-				response.put("Mensagem", "A Questão " + descricaoQuestao + " foi alterada para " 
-						+ questaoEntity.getDescricaoQuestao() + ". URI Json: ../quizminado/rest/questao/alterarQuestao");
-
-				json = new JSONObject(response);
-
-				return Response.status(Response.Status.OK).entity(json).build();
-
-			} else {
-
-				response.put("Mensagem", "Erro ao alterar a Questão Id: " + questao.getIdQuestao());
-
-				json = new JSONObject(response);
-
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-			response.put("Mensagem", "Erro ao alterar a Questão Id: " + questao.getIdQuestao());
-
-			json = new JSONObject(response);
-
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
-		}
-	}
-	
-	@DELETE
-	@Path("/deletarQuestao/{id:[0-9][0-9]*}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletarQuestaoPorId(@PathParam("id") String id) {
-
-		JSONObject json = null;
-
-		Map<String, String> response = new HashMap<String, String>();
-
-		String descricaoQuestaoRemovida = null;
-
-		try {
-
-			Questao questaoEntity = questaoRepository.getQuestao(Integer.parseInt(id));
-
-			if(questaoEntity == null) {
-
-				throw new Exception();
-			}
-
-			descricaoQuestaoRemovida = questaoEntity.getDescricaoQuestao();
-
-			boolean sucesso = questaoRepository.excluir(questaoEntity);
-
-			if(sucesso) {
-
-				response.put("Mensagem", "Questão " + descricaoQuestaoRemovida + " removida com sucesso.");
-
-				json = new JSONObject(response);
-
-				return Response.ok(json).build();
-
-			} else {
-
-				response.put("Mensagem", "Não foi possível remover a Questão Id: " + id);
-
-				json = new JSONObject(response);
-
-				return Response.status(Response.Status.NOT_FOUND).entity(json).build();
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-			response.put("Mensagem", "Nenhuma Questão encontrada para o Id: " + id);
-
-			json = new JSONObject(response);
-
 			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
 		}
 	}
