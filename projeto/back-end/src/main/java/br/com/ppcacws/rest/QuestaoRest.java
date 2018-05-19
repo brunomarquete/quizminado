@@ -28,6 +28,7 @@ import br.com.ppcacws.repository.DisciplinaRepository;
 import br.com.ppcacws.repository.NivelRepository;
 import br.com.ppcacws.repository.QuestaoRepository;
 import br.com.ppcacws.repository.RespostaRepository;
+import br.com.ppcacws.service.ControleQuestoesService;
 import br.com.ppcacws.service.JogarService;
 import br.com.ppcacws.vo.QuestaoVo;
 import br.com.ppcacws.vo.RespostaVo;
@@ -38,6 +39,9 @@ public class QuestaoRest {
 
 	@Inject
 	private JogarService jogarService;
+	
+	@Inject
+	private ControleQuestoesService controleQuestoesService;
 	
 	private final QuestaoRepository questaoRepository = new QuestaoRepository();
 	private final RespostaRepository respostaRepository = new RespostaRepository();
@@ -321,7 +325,7 @@ public class QuestaoRest {
 		List<Questao> listaQuestoes = questaoRepository.
 				buscarQuestoesPorDisciplinaENivelRandom(Integer.parseInt(idDisciplina), Integer.parseInt(idNivel));
 		
-		List<Questao> listaQuestoesDisponiveis = jogarService.removerQuestoesRespondidas(listaQuestoes, idUsuario);
+		List<Questao> listaQuestoesDisponiveis = controleQuestoesService.removerQuestoesRespondidas(listaQuestoes, idUsuario);
 
 		List<QuestaoVo> lista = QuestaoVo.popularQuestoes(listaQuestoesDisponiveis);
 
@@ -329,7 +333,25 @@ public class QuestaoRest {
 		
 		return Response.ok(entity).build();
 	}
-	
+
+	@GET
+	@Path("/buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(@QueryParam("idUsuario") String idUsuario,
+			@QueryParam("idNivel") String idNivel, @QueryParam("qtdQuestoes") String qtdQuestoes) {
+
+		List<Questao> listaQuestoes = questaoRepository.
+				buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(Integer.parseInt(idNivel), Integer.parseInt(qtdQuestoes));
+		
+		List<Questao> listaQuestoesDisponiveis = controleQuestoesService.removerQuestoesRespondidas(listaQuestoes, idUsuario);
+
+		List<QuestaoVo> lista = QuestaoVo.popularQuestoes(listaQuestoesDisponiveis);
+
+		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
+		
+		return Response.ok(entity).build();
+	}
+
 	@GET
 	@Path("/responderQuestao")
 	@Produces(MediaType.APPLICATION_JSON)

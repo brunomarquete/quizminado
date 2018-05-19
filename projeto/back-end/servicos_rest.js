@@ -115,6 +115,13 @@
 			"queryParams": "?idUsuario={idUsuario}&idDisciplina={idDisciplina}&idNivel={idNivel}"
 		},
 		{
+			"description": "Buscar Questões por Usuario, Nivel e Quantidade de Questoes Aleatoriamente",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom?idUsuario={idUsuario}&idNivel={idNivel}&qtdQuestoes={qtdQuestoes}",
+			"rel": "findAll",
+			"queryParams": "?idUsuario={idUsuario}&idNivel={idNivel}&qtdQuestoes={qtdQuestoes}"
+		},
+		{
 			"description": "Responder Questão por Disciplina e Nivel",
 			"method": "GET",
 			"href": "../quizminado/rest/questao/responderQuestao?idQuestao={idQuestao}&letraResposta={letraResposta}",
