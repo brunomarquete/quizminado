@@ -57,7 +57,7 @@ export abstract class BaseService<T extends Entidade> {
         return this.http.get(this.url('/listar'), this.config()).map(this.mapper)
     }
 
-    get(id: number): Observable<T> {
+    obter(id: number): Observable<T> {
 
         return this.http.get(this.url(`/obter/${id}`), this.config()).map(this.mapper)
     }

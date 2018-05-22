@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -23,7 +24,13 @@ import { CadastroEmailPageModule } from '../pages/cadastro-email/cadastro-email.
 import { ResetarSenhaPageModule } from '../pages/resetar-senha/resetar-senha.module';
 import { DisciplinaService } from '../providers/disciplina/disciplina.service';
 import { HttpModule } from '@angular/http';
-import { QuestaoProvider } from '../providers/questao/questao';
+import { QuestaoService } from '../providers/questao/questao.service';
+import { Tabuleiro2x2Page } from '../pages/tabuleiro2x2/tabuleiro2x2';
+import { Tabuleiro2x2PageModule } from '../pages/tabuleiro2x2/tabuleiro2x2.module';
+import { QuestaoPageModule } from '../pages/questao/questao.module';
+import { BombaPageModule } from '../pages/bomba/bomba.module';
+import { Utils } from '../providers/utils/utils';
+import { EventEmitterService } from '../providers/event-emitter/event-emitter.service';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcQMH4HuA9U0uXTXRhFriPK7ni_gvHVeA",
@@ -49,7 +56,11 @@ const firebaseConfig = {
     LoginEmailPageModule,
     CadastroEmailPageModule,
     ResetarSenhaPageModule,
-    HttpModule
+    Tabuleiro2x2PageModule,
+    QuestaoPageModule,
+    BombaPageModule,
+    HttpModule,
+    Ng2OrderModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,7 +76,9 @@ const firebaseConfig = {
     Facebook,
     TwitterConnect,
     DisciplinaService,
-    QuestaoProvider
+    QuestaoService,
+    Utils,
+    EventEmitterService
   ]
 })
 export class AppModule {}

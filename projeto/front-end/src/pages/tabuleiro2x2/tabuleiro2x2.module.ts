@@ -9,5 +9,8 @@ import { Tabuleiro2x2Page } from './tabuleiro2x2';
   imports: [
     IonicPageModule.forChild(Tabuleiro2x2Page),
   ],
+  exports: [
+    Tabuleiro2x2Page
+  ]
 })
 export class Tabuleiro2x2PageModule {}

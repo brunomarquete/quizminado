@@ -1,3 +1,9 @@
 page-tabuleiro2x2 {
+}
 
+.vertical-align-content > *
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
 }

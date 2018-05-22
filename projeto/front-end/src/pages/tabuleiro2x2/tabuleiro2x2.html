@@ -1,18 +1,59 @@
-<!--
-  Generated template for the Tabuleiro2x2Page page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>tabuleiro2x2</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>
+      <div style="text-align: center">QUIZMINADO</div>
+    </ion-title>
   </ion-navbar>
+</ion-header> 
 
-</ion-header>
+<ion-content class="vertical-align-content fundo" text-center padding >
 
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12>
 
-<ion-content padding>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-6>
+                            <button ion-button block color="dark" (click)="abrirQuestao(1)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas && posicoesAcertadas[0]" name="md-checkbox-outline"></ion-icon>
+                                    <ion-icon *ngIf="!posicoesAcertadas || !posicoesAcertadas[0]" name="md-help"></ion-icon>
+                            </button>
+                        </ion-col>
+                        <ion-col col-6>
+                            <button ion-button block color="dark" (click)="abrirQuestao(2)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas && posicoesAcertadas[1]" name="md-checkbox-outline"></ion-icon>
+                                    <ion-icon *ngIf="!posicoesAcertadas || !posicoesAcertadas[1]" name="md-help"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>
+                            <button ion-button block color="dark" (click)="abrirQuestao(3)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas && posicoesAcertadas[2]" name="md-checkbox-outline"></ion-icon>
+                                    <ion-icon *ngIf="!posicoesAcertadas || !posicoesAcertadas[2]" name="md-help"></ion-icon>
+                            </button>
+                        </ion-col>
+                        <ion-col col-6>
+                            <button ion-button block color="dark" (click)="abrirQuestao(4)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas && posicoesAcertadas[3]" name="md-checkbox-outline"></ion-icon>
+                                    <ion-icon *ngIf="!posicoesAcertadas || !posicoesAcertadas[3]" name="md-help"></ion-icon>
+                            </button>
+                        </ion-col>
+                        </ion-row>
+                </ion-grid>
+
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+
+                <button ion-button block color="dark" (click)="desistir()" large full>
+                    <ion-icon name="ios-close-circle-outline"></ion-icon>&nbsp;DESISTIR
+                </button>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>

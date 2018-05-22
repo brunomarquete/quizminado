@@ -6,7 +6,7 @@ import { Questao } from '../../models/questao.model';
 import { Observable } from 'rxjs/Observable';
 
 /*
-  Generated class for the QuestaoProvider provider.
+  Generated class for the QuestaoSerivce provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
@@ -44,4 +44,10 @@ export class QuestaoService extends BaseService<Questao>{
       return this.http.get(this.url('/responderQuestaoPorUsuario'), this.config()).map(this.mapper)
     }
 
+    buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(idUsuario: string, idNivel: string, qtdQuestoes: string): Observable<any> {
+            
+      return this.http.get(this.url(`/buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom?idUsuario=${idUsuario}&idNivel=${idNivel}&qtdQuestoes=${qtdQuestoes}`), this.config()).map(this.mapper)
+    }
+
+    
 }
