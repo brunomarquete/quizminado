@@ -15,7 +15,8 @@ import { EventEmitterService } from '../../providers/event-emitter/event-emitter
 })
 export class QuestaoPage {
 
-  posicaoQuestao : number;
+  posicoesAcertadas : number[];
+  posicaoAtual : number;
   questao : Questao;
 
   constructor(public navCtrl: NavController, 
@@ -24,7 +25,9 @@ export class QuestaoPage {
               private ng2OrderModule: Ng2OrderModule,
               private toastCtrl: ToastController) {
 
-          this.posicaoQuestao = this.navParams.get('posicaoQuestao');
+          this.posicoesAcertadas = this.navParams.get('posicoesAcertadas');
+          this.posicaoAtual = this.navParams.get('posicaoAtual');
+
           let idQuestao = this.navParams.get('idQuestao');
           this.questao = new Questao();
 
@@ -46,7 +49,7 @@ export class QuestaoPage {
      
       this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Parabéns! Você acertou!' })
       .present();
-      this.navCtrl.setRoot(Tabuleiro2x2Page, {"posicaoQuestao" : this.posicaoQuestao});
+      this.navCtrl.setRoot(Tabuleiro2x2Page, {"posicoesAcertadas" : this.posicoesAcertadas, "posicaoAtual" : this.posicaoAtual});
 
     } else {
 

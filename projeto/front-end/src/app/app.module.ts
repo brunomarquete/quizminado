@@ -31,6 +31,7 @@ import { QuestaoPageModule } from '../pages/questao/questao.module';
 import { BombaPageModule } from '../pages/bomba/bomba.module';
 import { Utils } from '../providers/utils/utils';
 import { EventEmitterService } from '../providers/event-emitter/event-emitter.service';
+import { FaseConcluidaPageModule } from '../pages/fase-concluida/fase-concluida.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcQMH4HuA9U0uXTXRhFriPK7ni_gvHVeA",
@@ -57,6 +58,7 @@ const firebaseConfig = {
     CadastroEmailPageModule,
     ResetarSenhaPageModule,
     Tabuleiro2x2PageModule,
+    FaseConcluidaPageModule,
     QuestaoPageModule,
     BombaPageModule,
     HttpModule,
