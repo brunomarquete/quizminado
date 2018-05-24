@@ -129,6 +129,17 @@
 			"queryParams": "?idQuestao={idQuestao}&letraResposta={letraResposta}"
 		},
 		{
+			"description": "Limpar Questões Respondidas por Usuário",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/limparQuestoesRespondidasPorUsuario?idUsuario={idUsuario}",
+			"queryParams": "?idUsuario={idUsuario}"
+		},
+		{
+			"description": "Limpar Todas as Questões",
+			"method": "GET",
+			"href": "../quizminado/rest/questao/limparTodasQuestoesRespondidas"
+		},
+		{
 			"description": "Responder Questão por Usuario, Disciplina e Nivel",
 			"method": "GET",
 			"href": "../quizminado/rest/questao/responderQuestaoPorUsuario?idUsuario={idUsuario}&idQuestao={idQuestao}&letraResposta={letraResposta}",

@@ -351,6 +351,26 @@ public class QuestaoRest {
 		
 		return Response.ok(entity).build();
 	}
+	
+	@GET
+	@Path("/limparQuestoesRespondidasPorUsuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response limparQuestoesRespondidasPorUsuario(@QueryParam("idUsuario") String idUsuario) {
+
+		controleQuestoesService.limparQuestoesRespondidasPorUsuario(idUsuario);
+		
+		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/limparTodasQuestoesRespondidas")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response limparTodasQuestoesRespondidas() {
+
+		controleQuestoesService.limparTodasQuestoesRespondidas();
+		
+		return Response.ok().build();
+	}
 
 	@GET
 	@Path("/responderQuestao")

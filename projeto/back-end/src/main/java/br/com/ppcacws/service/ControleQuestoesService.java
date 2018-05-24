@@ -43,6 +43,29 @@ public class ControleQuestoesService {
 		
 		return listaQuestoesDisponiveis;
 	}
+
+	public void limparQuestoesRespondidasPorUsuario(String idUsuario) {
+		
+		String chaveUsuarioQuestao = "";
+		
+		QuestaoVo questaoRespondida = null;
+		
+		Iterator<Map.Entry<String, QuestaoVo>> questoesRespondidasPorUsuarioIterator = mapaRespostaQuestoes.entrySet().iterator();
+		
+		while(questoesRespondidasPorUsuarioIterator.hasNext()) {
+			
+			QuestaoVo questao = questoesRespondidasPorUsuarioIterator.next().getValue();
+			
+			chaveUsuarioQuestao = this.getChaveUsuarioQuestao(idUsuario, questao.getIdQuestao());
+			
+			questaoRespondida = this.getMapaRespostaQuestoes().get(chaveUsuarioQuestao);
+			
+			if(questaoRespondida != null) {
+				
+				questoesRespondidasPorUsuarioIterator.remove();
+			}
+		}
+	}
 	
 	
 	public String getChaveUsuarioQuestao(String idUsuario, Integer idQuestao) {
@@ -57,7 +80,7 @@ public class ControleQuestoesService {
 		return mapaRespostaQuestoes;
 	}
 	
-	public void limparQuestoesRespondidas() {
+	public void limparTodasQuestoesRespondidas() {
 		
 		mapaRespostaQuestoes = new HashMap<String, QuestaoVo>();
 	}
