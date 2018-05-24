@@ -65,7 +65,7 @@
 
                 <ion-card color="dark">
                     <ion-card-header>
-                        Questão de {{squestao?.disciplina?.descricaoDisciplina}}
+                        Questão de {{questao?.disciplina?.descricaoDisciplina}}
                     </ion-card-header>
                     <ion-card-content>
                         {{questao?.descricaoQuestao}}
@@ -78,7 +78,7 @@
             <ion-row *ngFor="let resposta of questao.respostas">
                 <ion-col col-12>
 
-                    <ion-card color="dark" (click)="responder(resposta.situacaoResposta)">
+                    <ion-card color="dark" (click)="responder(resposta.situacaoResposta, resposta.letraResposta)">
                     <ion-card-content>
                         {{resposta.letraResposta}}) {{resposta.descricaoResposta}}
                     </ion-card-content>

@@ -2,5 +2,5 @@ export const environment = {
 
     production: true,
 
-    api: 'quizminado/rest/',
+    api: 'http://www.quizminado.com.br/rest/',
 };

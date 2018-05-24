@@ -1,5 +1,4 @@
 import { Entidade } from './entidade.model';
-import { List } from 'ionic-angular';
 import { Resposta } from './resposta.model';
 import { Disciplina } from './disciplina.model';
 import { Nivel } from './nivel.model';

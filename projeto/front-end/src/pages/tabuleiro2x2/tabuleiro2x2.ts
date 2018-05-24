@@ -1,17 +1,11 @@
-import { Component, ViewChild, NgZone, ChangeDetectorRef, ApplicationRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
-import { DisciplinaService } from '../../providers/disciplina/disciplina.service';
-import { Disciplina } from '../../models/disciplina.model';
-import { PosicaoQuestao } from '../../models/posicao-questao.model';
 import { QuestaoService } from '../../providers/questao/questao.service';
-import { User } from '../../providers/auth/user';
 import { Questao } from '../../models/questao.model';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { QuestaoPage } from '../questao/questao';
 import { HomePage } from '../home/home';
 import { BombaPage } from '../bomba/bomba';
 import { Utils } from '../../providers/utils/utils';
-import { EventEmitterService } from '../../providers/event-emitter/event-emitter.service';
 import { FaseConcluidaPage } from '../fase-concluida/fase-concluida';
 
 
@@ -47,9 +41,10 @@ export class Tabuleiro2x2Page {
   }
 
   buscarQuestoes() {
-    this.questaoService.buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(this.angularFireAuth.auth.currentUser.uid,"1","4").subscribe(
+    this.questaoService.buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(this.angularFireAuth.auth.currentUser.email,"1","4").subscribe(
      (questoes) => {
        this.questoes = questoes.questao;
+       console.log("Vieram " + this.questoes.length + " questões do serviço!");
      }
     );
   }
@@ -61,7 +56,7 @@ export class Tabuleiro2x2Page {
 
   abrirQuestao(posicao: number) {
 
-    if (this.posicoesAcertadas.indexOf(posicao) >= 0) {
+    if (this.posicoesAcertadas && this.posicoesAcertadas.indexOf(posicao) >= 0) {
 
       this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Você já acertou esta questão!' })
       .present();
@@ -104,29 +99,44 @@ export class Tabuleiro2x2Page {
       );
   }
 
- responder(situacaoResposta: string) {
+ responder(situacaoResposta: string, letraResposta: string) {
 
-  if (situacaoResposta == 'C') {
-   
-    this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Parabéns! Você acertou!' })
-    .present();
-    this.isExibirQuestao = false;
-    this.isExibirTabuleiro = true;
+    let resultado;
 
-    if (this.posicao > 0) {
-      this.posicoesAcertadas.push(this.posicao);
-    }
+    this.questaoService.responderQuestaoPorUsuario(this.angularFireAuth.auth.currentUser.email, 
+                                                 this.questao.idQuestao.toString(), 
+                                                 letraResposta)
+                                                .subscribe(
+    (resposta) => {
 
-    if (this.posicoesAcertadas.length == 3) {
-      this.faseConcluida();
-    }
+          resultado = resposta.Mensagem;
 
-  } else {
+          console.log(resultado);
 
-    this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Você errou! Game Over!' })
-    .present();
-    this.navCtrl.setRoot(HomePage);
-  }
+          if (resultado == 'Certo') {
+    
+            this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Parabéns! Você acertou!' })
+            .present();
+            this.isExibirQuestao = false;
+            this.isExibirTabuleiro = true;
+    
+            if (this.posicao > 0) {
+              this.posicoesAcertadas.push(this.posicao);
+            }
+    
+            if (this.posicoesAcertadas.length == 3) {
+              this.faseConcluida();
+            }
+    
+        } else {
+    
+            this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Você errou! Game Over!' })
+            .present();
+            this.navCtrl.setRoot(HomePage);
+        }
+
+    });
+  
 
 }
 

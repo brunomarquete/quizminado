@@ -80,8 +80,9 @@
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
-    <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.0" />
     <plugin name="cordova-plugin-googleplus" spec="^5.2.2">
         <variable name="REVERSED_CLIENT_ID" value="642248937925-uq75qvpjpfrgsbveji8chsp9jrojefo5.apps.googleusercontent.com" />
     </plugin>
+    <engine name="android" spec="~7.0.0" />
 </widget>

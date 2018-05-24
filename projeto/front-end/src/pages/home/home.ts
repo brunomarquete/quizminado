@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth/auth-service';
 import { LoginPage } from '../login/login';
-import { DisciplinaService } from '../../providers/disciplina/disciplina.service';
 import { Disciplina } from '../../models/disciplina.model';
 import { Tabuleiro2x2Page } from '../tabuleiro2x2/tabuleiro2x2';
 
@@ -14,8 +13,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, 
               private authService: AuthService,
-              private toastCtrl: ToastController,
-              private disciplinaService : DisciplinaService) {}
+              private toastCtrl: ToastController) {}
 
  disciplinas : Array<Disciplina>;
 

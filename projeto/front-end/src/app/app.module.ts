@@ -25,9 +25,7 @@ import { ResetarSenhaPageModule } from '../pages/resetar-senha/resetar-senha.mod
 import { DisciplinaService } from '../providers/disciplina/disciplina.service';
 import { HttpModule } from '@angular/http';
 import { QuestaoService } from '../providers/questao/questao.service';
-import { Tabuleiro2x2Page } from '../pages/tabuleiro2x2/tabuleiro2x2';
 import { Tabuleiro2x2PageModule } from '../pages/tabuleiro2x2/tabuleiro2x2.module';
-import { QuestaoPageModule } from '../pages/questao/questao.module';
 import { BombaPageModule } from '../pages/bomba/bomba.module';
 import { Utils } from '../providers/utils/utils';
 import { EventEmitterService } from '../providers/event-emitter/event-emitter.service';
@@ -59,7 +57,6 @@ const firebaseConfig = {
     ResetarSenhaPageModule,
     Tabuleiro2x2PageModule,
     FaseConcluidaPageModule,
-    QuestaoPageModule,
     BombaPageModule,
     HttpModule,
     Ng2OrderModule

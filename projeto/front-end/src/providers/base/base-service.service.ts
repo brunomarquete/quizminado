@@ -1,4 +1,4 @@
-import { Injectable, Injector, Inject, ReflectiveInjector } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Http, Headers, Response, RequestOptionsArgs } from "@angular/http"
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
