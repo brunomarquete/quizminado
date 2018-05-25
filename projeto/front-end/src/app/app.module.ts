@@ -17,6 +17,7 @@ import { AuthService } from '../providers/auth/auth-service';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { LoginPageModule } from '../pages/login/login.module';
 import { LoginEmailPageModule } from '../pages/login-email/login-email.module';
@@ -29,7 +30,9 @@ import { TabuleiroPageModule } from '../pages/tabuleiro/tabuleiro.module';
 import { BombaPageModule } from '../pages/bomba/bomba.module';
 import { Utils } from '../providers/utils/utils';
 import { EventEmitterService } from '../providers/event-emitter/event-emitter.service';
-import { FaseConcluidaPageModule } from '../pages/fase-concluida/fase-concluida.module';
+import { NivelConcluidoPageModule } from '../pages/nivel-concluido/nivel-concluido.module';
+import { EventLoggerProvider } from '../providers/event-logger/event-logger';
+import { JogoConcluidoPageModule } from '../pages/jogo-concluido/jogo-concluido.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcQMH4HuA9U0uXTXRhFriPK7ni_gvHVeA",
@@ -56,7 +59,8 @@ const firebaseConfig = {
     CadastroEmailPageModule,
     ResetarSenhaPageModule,
     TabuleiroPageModule,
-    FaseConcluidaPageModule,
+    NivelConcluidoPageModule,
+    JogoConcluidoPageModule,
     BombaPageModule,
     HttpModule,
     Ng2OrderModule
@@ -77,7 +81,9 @@ const firebaseConfig = {
     DisciplinaService,
     QuestaoService,
     Utils,
-    EventEmitterService
+    EventEmitterService,
+    FirebaseAnalytics,
+    EventLoggerProvider
   ]
 })
 export class AppModule {}

@@ -40,6 +40,8 @@ export const Environment = {
              {"numero" : 33, "posicoes": 10, "bombas" : 4, "posicoesVitoria" : 6, "dificuldade" : 3},
              {"numero" : 34, "posicoes": 4, "bombas" : 3, "posicoesVitoria" : 1, "dificuldade" : 2},
              {"numero" : 35, "posicoes": 4, "bombas" : 3, "posicoesVitoria" : 1, "dificuldade" : 3}
-            ]
+            ],
+            
+    ultimo_nivel: 35
 
 };

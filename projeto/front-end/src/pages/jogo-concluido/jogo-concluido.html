@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      <div style="text-align: center">QUIZMINADO</div>
+    </ion-title>
+  </ion-navbar>
+</ion-header> 
+
+<ion-content class="vertical-align-content fundo" text-center padding >
+
+  <ion-grid>
+      <ion-row>
+          <ion-col col-12>
+                <div class="text-align: center"><h2> Parabéns! Jogo concluído!</h2></div>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-12>
+                  <img src="../assets/imgs/podium.png" height="300px" width="400px">
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col col-12>
+
+              <button ion-button block color="dark" (click)="jogarNovamente()" large full>
+                  <ion-icon name="game-controller-a"></ion-icon>&nbsp;JOGAR NOVAMENTE
+              </button>
+
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col col-12>
+
+              <button ion-button block color="dark" (click)="menu()" large full>
+                  <ion-icon name="ios-menu"></ion-icon>&nbsp;MENU
+              </button>
+
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+
+</ion-content>

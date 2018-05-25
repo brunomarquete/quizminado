@@ -6,6 +6,8 @@ import { AuthService } from '../../providers/auth/auth-service';
 import { HomePage } from '../home/home';
 import { CadastroEmailPage } from '../cadastro-email/cadastro-email';
 import { LoginEmailPage } from '../login-email/login-email';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { EventLoggerProvider } from '../../providers/event-logger/event-logger';
 
 @IonicPage()
 @Component({
@@ -19,7 +21,12 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     private toastCtrl: ToastController,
-    private authService: AuthService) {
+    private authService: AuthService,
+    public logger: EventLoggerProvider) {
+  }
+
+  ionViewDidEnter() {
+    this.logger.log('abriu_tela_login', {})
   }
 
   createAccount() {

@@ -7,8 +7,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home';
 import { BombaPage } from '../bomba/bomba';
 import { Utils } from '../../providers/utils/utils';
-import { FaseConcluidaPage } from '../fase-concluida/fase-concluida';
-
+import { NivelConcluidoPage } from '../nivel-concluido/nivel-concluido';
+import { JogoConcluidoPage } from '../jogo-concluido/jogo-concluido';
 
 @IonicPage()
 @Component({
@@ -183,7 +183,12 @@ export class TabuleiroPage {
             }
     
             if (this.posicoesAcertadas.length == this.posicoesVitoria) {
-              this.faseConcluida();
+
+              if (this.nivelAtual == Environment.ultimo_nivel) {
+                this.navCtrl.setRoot(JogoConcluidoPage)
+              } else {
+                this.nivelConcluido();
+              }
             }
     
         } else {
@@ -205,8 +210,8 @@ export class TabuleiroPage {
     this.limparQuestoesRespondidasUsuario()
   }
 
-  faseConcluida() {
-    let modal = this.modalCtrl.create(FaseConcluidaPage, {"nivelAtual" : this.nivelAtual});
+  nivelConcluido() {
+    let modal = this.modalCtrl.create(NivelConcluidoPage, {"nivelAtual" : this.nivelAtual});
     modal.present();
   }
 

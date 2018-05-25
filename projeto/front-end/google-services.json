@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "642248937925",
+    "firebase_url": "https://quizminado.firebaseio.com",
+    "project_id": "quizminado",
+    "storage_bucket": "quizminado.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642248937925:android:3fbfbb5fe9e0ff51",
+        "android_client_info": {
+          "package_name": "io.ppca.csw.quizminado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642248937925-kc2gfqvlhq851paql4ni913g10lreftn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ppca.csw.quizminado",
+            "certificate_hash": "907f6b3d1dc1787432b59fcce2a18e571b2a5558"
+          }
+        },
+        {
+          "client_id": "642248937925-uq75qvpjpfrgsbveji8chsp9jrojefo5.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "642248937925-uq75qvpjpfrgsbveji8chsp9jrojefo5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvxpqIpDMAxF_qnNgjr4Q4W2MS8WepjSA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642248937925-uq75qvpjpfrgsbveji8chsp9jrojefo5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

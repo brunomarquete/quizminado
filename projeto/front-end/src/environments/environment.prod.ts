@@ -34,5 +34,7 @@ export const environment = {
              {"numero" : 28, "posicoes": 10, "bombas" : 4, "posicoesVitoria" : 6, "dificuldade" : 3},
              {"numero" : 29, "posicoes": 4, "bombas" : 3, "posicoesVitoria" : 1, "dificuldade" : 2},
              {"numero" : 30, "posicoes": 4, "bombas" : 3, "posicoesVitoria" : 1, "dificuldade" : 3}
-            ]
+            ],
+            
+    ultimo_nivel: 35
 };
