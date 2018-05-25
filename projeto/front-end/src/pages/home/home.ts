@@ -29,7 +29,7 @@ export class HomePage {
   }
 
   jogar() {
-    this.navCtrl.setRoot(Tabuleiro2x2Page);
+    this.navCtrl.setRoot(Tabuleiro2x2Page, {"nivelAtual" : 1});
   }
 
   ngOnInit() {

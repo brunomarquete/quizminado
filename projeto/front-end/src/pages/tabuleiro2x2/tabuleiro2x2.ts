@@ -1,5 +1,6 @@
+import { Environment } from '../../environments/environment';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, LoadingController } from 'ionic-angular';
 import { QuestaoService } from '../../providers/questao/questao.service';
 import { Questao } from '../../models/questao.model';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -16,8 +17,14 @@ import { FaseConcluidaPage } from '../fase-concluida/fase-concluida';
 })
 export class Tabuleiro2x2Page {
 
+  nivelAtual: number = 1;
+  bombas: number;
+  posicoes: number;
+  posicoesVitoria: number;
+  dificuldade: number;
+
   questoes : Array<Questao>;
-  posicaoBomba : number;
+  posicoesBomba : number[] = [];
   idQuestao : number;
   questao : Questao;
   isExibirTabuleiro : boolean = true;
@@ -31,27 +38,73 @@ export class Tabuleiro2x2Page {
               private questaoService: QuestaoService,
               private utils : Utils,
               private toastCtrl: ToastController,
-              public modalCtrl: ModalController)  {
+              public modalCtrl: ModalController,
+              public loadingCtrl: LoadingController)  {
         
   }
 
   ionViewDidLoad() {
+
+    this.nivelAtual = this.navParams.get('nivelAtual');
+
+    let nivel = Environment.niveis.filter((nivel) => nivel.numero == this.nivelAtual)[0];
+
+    this.posicoes = nivel.posicoes
+    this.bombas = nivel.bombas
+    this.posicoesVitoria = nivel.posicoesVitoria
+    this.dificuldade = nivel.dificuldade
+
+    console.log("Nível: " + nivel.numero + " Bombas: " + nivel.bombas + " Dificuldade: " + nivel.dificuldade);
+
     this.buscarQuestoes();
-    this.buscarPosicaoBomba();
+    this.sortearBomba();
   }
 
   buscarQuestoes() {
-    this.questaoService.buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(this.angularFireAuth.auth.currentUser.email,"1","4").subscribe(
-     (questoes) => {
-       this.questoes = questoes.questao;
-       console.log("Vieram " + this.questoes.length + " questões do serviço!");
-     }
+
+    let loading = this.loadingCtrl.create({content:'Sorteando questões...'});
+    loading.present(loading);
+    
+    this.questaoService.buscarQuestoesPorUsuarioNivelEQtdQuestoesRandom(
+                                this.angularFireAuth.auth.currentUser.email,
+                                this.dificuldade.toString(), 
+                                this.posicoes.toString())
+     .subscribe(
+        (questoes) => {
+          this.questoes = questoes.questao;
+          if (this.questoes) {
+              console.log("Vieram " + this.questoes.length + " questões do serviço!");
+              loading.dismiss();
+          } else {
+              console.log(" Não vieram questões do serviço!");
+          }
+        }
     );
   }
 
-  buscarPosicaoBomba() {
-    this.posicaoBomba = this.utils.gerarIntRandomico(1,4);
-    console.log(this.posicaoBomba);
+  sortearBomba() {
+
+    if (this.bombas > 0) {
+
+      let i;
+      for (i = 1; i <= this.bombas;) {
+        
+        let posicaoBomba = this.utils.gerarIntRandomico(1, this.posicoes);
+
+        if (this.posicoesBomba.indexOf(posicaoBomba) < 0) {
+          this.posicoesBomba.push(posicaoBomba);
+          console.log("Posição da bomba " + i + ": "  + posicaoBomba);
+          i++;
+        }
+
+      }
+
+      
+      
+    } else {
+      console.log("Não tem bomba!");
+    }
+
   }
 
   abrirQuestao(posicao: number) {
@@ -65,7 +118,7 @@ export class Tabuleiro2x2Page {
 
       this.posicao = posicao;
 
-      if (posicao != this.posicaoBomba) {
+      if (this.posicoesBomba.indexOf(posicao) < 0) {
 
           this.questao = this.questoes[posicao-1];
           this.questao.respostas.sort((a, b) : number => {
@@ -101,6 +154,9 @@ export class Tabuleiro2x2Page {
 
  responder(situacaoResposta: string, letraResposta: string) {
 
+    let loading = this.loadingCtrl.create({content:'Respondendo questão...'});
+    loading.present(loading);
+
     let resultado;
 
     this.questaoService.responderQuestaoPorUsuario(this.angularFireAuth.auth.currentUser.email, 
@@ -113,6 +169,8 @@ export class Tabuleiro2x2Page {
 
           console.log(resultado);
 
+          loading.dismiss();
+
           if (resultado == 'Certo') {
     
             this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Parabéns! Você acertou!' })
@@ -124,7 +182,7 @@ export class Tabuleiro2x2Page {
               this.posicoesAcertadas.push(this.posicao);
             }
     
-            if (this.posicoesAcertadas.length == 3) {
+            if (this.posicoesAcertadas.length == this.posicoesVitoria) {
               this.faseConcluida();
             }
     
@@ -132,6 +190,7 @@ export class Tabuleiro2x2Page {
     
             this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Você errou! Game Over!' })
             .present();
+            this.limparQuestoesRespondidasUsuario();
             this.navCtrl.setRoot(HomePage);
         }
 
@@ -143,10 +202,11 @@ export class Tabuleiro2x2Page {
   bomba() {
     let modal = this.modalCtrl.create(BombaPage);
     modal.present();
+    this.limparQuestoesRespondidasUsuario()
   }
 
   faseConcluida() {
-    let modal = this.modalCtrl.create(FaseConcluidaPage);
+    let modal = this.modalCtrl.create(FaseConcluidaPage, {"nivelAtual" : this.nivelAtual});
     modal.present();
   }
 
@@ -158,7 +218,18 @@ export class Tabuleiro2x2Page {
   desistir() {
     this.posicao = 0;
     this.posicoesAcertadas = [];
+    this.limparQuestoesRespondidasUsuario();
     this.navCtrl.setRoot(HomePage);
+  }
+
+  limparQuestoesRespondidasUsuario() {
+
+    this.questaoService.limparQuestoesRespondidasPorUsuario(this.angularFireAuth.auth.currentUser.email).subscribe(
+      () => {
+        console.log("Questões limpadas.");
+      }
+    );
+
   }
 
 }

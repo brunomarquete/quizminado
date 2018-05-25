@@ -41,5 +41,16 @@ export class QuestaoService extends BaseService<Questao>{
             
       return this.http.get(this.url(`/responderQuestaoPorUsuario?idUsuario=${idUsuario}&idQuestao=${idQuestao}&letraResposta=${letraResposta}`), this.config()).map(this.mapper)
     }
+
+    limparQuestoesRespondidasPorUsuario(idUsuario: string) {
+
+      return this.http.get(this.url(`/limparQuestoesRespondidasPorUsuario?idUsuario=${idUsuario}`), this.config()).map((resp) => {});
+
+    }
+
+    limparTodasQuestoesRespondidas() {
+
+      return this.http.get(this.url(`/limparTodasQuestoesRespondidas`), this.config()).map((resp) => {});
+    }
     
 }

@@ -8,7 +8,8 @@
 
 <ion-content class="fundo" text-center padding >
 
-    <div style="padding-top: 150px" *ngIf="isExibirTabuleiro">
+    <div [ngClass]="{'tabuleiro4posicoes' : posicoes && posicoes == 4, 'tabuleiro6posicoes' : posicoes && posicoes == 6, 'tabuleiro8posicoes' : posicoes && posicoes == 8, 'tabuleiro10posicoes' : posicoes && posicoes == 10}" *ngIf="isExibirTabuleiro">
+        <div class="tituloNivel"> Nível {{nivelAtual}}</div>
         <ion-grid>
             <ion-row>
                 <ion-col col-12>
@@ -42,6 +43,52 @@
                                 </button>
                             </ion-col>
                         </ion-row>
+
+                        <ion-row *ngIf="posicoes && posicoes >= 6">
+                            <ion-col col-6>
+                                <button ion-button block color="dark" (click)="abrirQuestao(5)"  large full>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(5) < 0" name="md-help"></ion-icon>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(5) >= 0" name="md-checkbox-outline"></ion-icon>
+                                </button>
+                            </ion-col>
+                            <ion-col col-6>
+                                <button ion-button block color="dark" (click)="abrirQuestao(6)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(6) < 0" name="md-help"></ion-icon>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(6) >= 0" name="md-checkbox-outline"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row *ngIf="posicoes && posicoes >= 8">
+                            <ion-col col-6>
+                                <button ion-button block color="dark" (click)="abrirQuestao(7)"  large full>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(7) < 0" name="md-help"></ion-icon>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(7) >= 0" name="md-checkbox-outline"></ion-icon>
+                                </button>
+                            </ion-col>
+                            <ion-col col-6>
+                                <button ion-button block color="dark" (click)="abrirQuestao(8)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(8) < 0" name="md-help"></ion-icon>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(8) >= 0" name="md-checkbox-outline"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row *ngIf="posicoes && posicoes >= 10">
+                            <ion-col col-6>
+                                <button ion-button block color="dark" (click)="abrirQuestao(9)"  large full>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(9) < 0" name="md-help"></ion-icon>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(9) >= 0" name="md-checkbox-outline"></ion-icon>
+                                </button>
+                            </ion-col>
+                            <ion-col col-6>
+                                <button ion-button block color="dark" (click)="abrirQuestao(10)" large full>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(10) < 0" name="md-help"></ion-icon>
+                                    <ion-icon *ngIf="posicoesAcertadas.indexOf(10) >= 0" name="md-checkbox-outline"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+
                     </ion-grid>
 
                 </ion-col>

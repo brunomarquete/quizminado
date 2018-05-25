@@ -21,7 +21,7 @@ export class BombaPage {
   }
 
   jogarNovamente(){
-    this.navCtrl.setRoot(Tabuleiro2x2Page);
+    this.navCtrl.setRoot(Tabuleiro2x2Page, {"nivelAtual": 1});
   }
 
   menu() {
