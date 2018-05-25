@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Tabuleiro2x2Page } from '../tabuleiro2x2/tabuleiro2x2';
+import { TabuleiroPage } from '../tabuleiro/tabuleiro';
 
 @IonicPage()
 @Component({
@@ -17,7 +17,7 @@ export class FaseConcluidaPage {
   proximoNivel() {
 
     if (this.nivelAtual) {
-      this.navCtrl.setRoot(Tabuleiro2x2Page, {"nivelAtual" : this.nivelAtual + 1});
+      this.navCtrl.setRoot(TabuleiroPage, {"nivelAtual" : this.nivelAtual + 1});
     } 
     
   }

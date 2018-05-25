@@ -12,10 +12,10 @@ import { FaseConcluidaPage } from '../fase-concluida/fase-concluida';
 
 @IonicPage()
 @Component({
-  selector: 'page-tabuleiro2x2',
-  templateUrl: 'tabuleiro2x2.html',
+  selector: 'page-tabuleiro',
+  templateUrl: 'tabuleiro.html',
 })
-export class Tabuleiro2x2Page {
+export class TabuleiroPage {
 
   nivelAtual: number = 1;
   bombas: number;
@@ -208,11 +208,6 @@ export class Tabuleiro2x2Page {
   faseConcluida() {
     let modal = this.modalCtrl.create(FaseConcluidaPage, {"nivelAtual" : this.nivelAtual});
     modal.present();
-  }
-
-  voltar() {
-    this.isExibirQuestao = false;
-    this.isExibirTabuleiro = true;
   }
 
   desistir() {

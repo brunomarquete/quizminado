@@ -26,3 +26,11 @@
     background-repeat: no-repeat;
     background-size:cover;
 }
+
+.vertical-align-content > *
+{
+     display: flex!important;
+     align-content: center !important;
+     align-items: center !important;
+     vertical-align: middle !important;
+}
