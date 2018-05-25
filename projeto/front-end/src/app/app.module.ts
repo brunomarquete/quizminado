@@ -33,6 +33,7 @@ import { EventEmitterService } from '../providers/event-emitter/event-emitter.se
 import { NivelConcluidoPageModule } from '../pages/nivel-concluido/nivel-concluido.module';
 import { EventLoggerProvider } from '../providers/event-logger/event-logger';
 import { JogoConcluidoPageModule } from '../pages/jogo-concluido/jogo-concluido.module';
+import { CreditosPageModule } from '../pages/creditos/creditos.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcQMH4HuA9U0uXTXRhFriPK7ni_gvHVeA",
@@ -62,6 +63,7 @@ const firebaseConfig = {
     NivelConcluidoPageModule,
     JogoConcluidoPageModule,
     BombaPageModule,
+    CreditosPageModule,
     HttpModule,
     Ng2OrderModule
   ],

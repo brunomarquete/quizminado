@@ -4,6 +4,7 @@ import { AuthService } from '../../providers/auth/auth-service';
 import { LoginPage } from '../login/login';
 import { Disciplina } from '../../models/disciplina.model';
 import { TabuleiroPage } from '../tabuleiro/tabuleiro';
+import { CreditosPage } from '../creditos/creditos';
 
 @Component({
   selector: 'page-home',
@@ -30,6 +31,10 @@ export class HomePage {
 
   jogar() {
     this.navCtrl.setRoot(TabuleiroPage, {"nivelAtual" : 1});
+  }
+
+  creditos() {
+    this.navCtrl.setRoot(CreditosPage);
   }
 
   ngOnInit() {
