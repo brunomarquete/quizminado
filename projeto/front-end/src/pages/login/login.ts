@@ -6,7 +6,6 @@ import { AuthService } from '../../providers/auth/auth-service';
 import { HomePage } from '../home/home';
 import { CadastroEmailPage } from '../cadastro-email/cadastro-email';
 import { LoginEmailPage } from '../login-email/login-email';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { EventLoggerProvider } from '../../providers/event-logger/event-logger';
 
 @IonicPage()
