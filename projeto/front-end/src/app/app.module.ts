@@ -14,9 +14,6 @@ import { HomePage } from '../pages/home/home';
 
 import { AuthService } from '../providers/auth/auth-service';
 
-import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook } from '@ionic-native/facebook';
-import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { LoginPageModule } from '../pages/login/login.module';
@@ -77,9 +74,6 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    GooglePlus,
-    Facebook,
-    TwitterConnect,
     DisciplinaService,
     QuestaoService,
     Utils,

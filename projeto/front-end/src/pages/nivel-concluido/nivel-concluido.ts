@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabuleiroPage } from '../tabuleiro/tabuleiro';
-import { EventLoggerProvider } from '../../providers/event-logger/event-logger';
 
 @IonicPage()
 @Component({
@@ -12,7 +11,7 @@ export class NivelConcluidoPage {
 
   nivelAtual : number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public logger: EventLoggerProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   proximoNivel() {
@@ -26,7 +25,6 @@ export class NivelConcluidoPage {
   ionViewDidLoad() {
       this.nivelAtual = this.navParams.get('nivelAtual');
       console.log("Modal nível concluído pegou o nivel: " + this.nivelAtual);
-      this.logger.log(`nivel_${this.nivelAtual}`, {})
   }
 
 }

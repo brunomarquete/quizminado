@@ -17,13 +17,13 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(1)" large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(1)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(1) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(1) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
                             </ion-col>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(2)" large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(2)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(2) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(2) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
@@ -31,13 +31,13 @@
                         </ion-row>
                         <ion-row>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(3)"  large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(3)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(3) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(3) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
                             </ion-col>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(4)" large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(4)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(4) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(4) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
@@ -46,13 +46,13 @@
 
                         <ion-row *ngIf="posicoes && posicoes >= 6">
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(5)"  large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(5)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(5) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(5) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
                             </ion-col>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(6)" large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(6)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(6) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(6) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
@@ -61,13 +61,13 @@
 
                         <ion-row *ngIf="posicoes && posicoes >= 8">
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(7)"  large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(7)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(7) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(7) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
                             </ion-col>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(8)" large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(8)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(8) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(8) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
@@ -76,13 +76,13 @@
 
                         <ion-row *ngIf="posicoes && posicoes >= 10">
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(9)"  large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(9)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(9) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(9) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
                             </ion-col>
                             <ion-col col-6>
-                                <button ion-button block color="dark" (click)="abrirQuestao(10)" large full>
+                                <button ion-button block color="dark" (click)="abrirQuestao(10)" full>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(10) < 0" name="md-help"></ion-icon>
                                     <ion-icon *ngIf="posicoesAcertadas.indexOf(10) >= 0" name="md-checkbox-outline"></ion-icon>
                                 </button>
@@ -96,7 +96,7 @@
             <ion-row>
                 <ion-col col-12>
 
-                    <button ion-button block color="dark" (click)="desistir()" large full>
+                    <button ion-button block color="dark" (click)="desistir()" sfull>
                         <ion-icon name="ios-close-circle-outline"></ion-icon>&nbsp;DESISTIR
                     </button>
 
@@ -112,10 +112,10 @@
 
                     <ion-card color="dark">
                         <ion-card-header>
-                            Questão de {{questao?.disciplina?.descricaoDisciplina}}
+                            <div class="texto_questao">Questão de {{questao?.disciplina?.descricaoDisciplina}}</div>
                         </ion-card-header>
                         <ion-card-content>
-                            {{questao?.descricaoQuestao}}
+                            <div class="texto_questao">{{questao?.descricaoQuestao}}</div>
                         </ion-card-content>
                     </ion-card>
 
@@ -127,7 +127,7 @@
 
                     <ion-card color="dark" (click)="responder(resposta.situacaoResposta, resposta.letraResposta)">
                     <ion-card-content>
-                        {{resposta.letraResposta}}) {{resposta.descricaoResposta}}
+                        <div class="texto_questao">{{resposta.letraResposta}}) {{resposta.descricaoResposta}}</div>
                     </ion-card-content>
                     </ion-card>
                     

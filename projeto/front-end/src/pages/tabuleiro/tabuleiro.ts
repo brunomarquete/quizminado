@@ -9,6 +9,7 @@ import { BombaPage } from '../bomba/bomba';
 import { Utils } from '../../providers/utils/utils';
 import { NivelConcluidoPage } from '../nivel-concluido/nivel-concluido';
 import { JogoConcluidoPage } from '../jogo-concluido/jogo-concluido';
+import { EventLoggerProvider } from '../../providers/event-logger/event-logger';
 
 @IonicPage()
 @Component({
@@ -39,7 +40,8 @@ export class TabuleiroPage {
               private utils : Utils,
               private toastCtrl: ToastController,
               public modalCtrl: ModalController,
-              public loadingCtrl: LoadingController)  {
+              public loadingCtrl: LoadingController,
+              public logger: EventLoggerProvider)  {
         
   }
 
@@ -154,6 +156,8 @@ export class TabuleiroPage {
 
  responder(situacaoResposta: string, letraResposta: string) {
 
+    this.logger.log("respondeu", {});
+
     let loading = this.loadingCtrl.create({content:'Respondendo questão...'});
     loading.present(loading);
 
@@ -172,6 +176,8 @@ export class TabuleiroPage {
           loading.dismiss();
 
           if (resultado == 'Certo') {
+
+            this.logger.log("acertou", {});
     
             this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Parabéns! Você acertou!' })
             .present();
@@ -185,13 +191,18 @@ export class TabuleiroPage {
             if (this.posicoesAcertadas.length == this.posicoesVitoria) {
 
               if (this.nivelAtual == Environment.ultimo_nivel) {
+
+                this.logger.log("jogo_concluido", {});
                 this.navCtrl.setRoot(JogoConcluidoPage)
+
               } else {
                 this.nivelConcluido();
               }
             }
     
         } else {
+
+            this.logger.log("errou", {});
     
             this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Você errou! Game Over!' })
             .present();
@@ -205,17 +216,27 @@ export class TabuleiroPage {
 }
 
   bomba() {
+
+    this.logger.log("bomba", {});
+
     let modal = this.modalCtrl.create(BombaPage);
     modal.present();
     this.limparQuestoesRespondidasUsuario()
   }
 
   nivelConcluido() {
+
+    let descLog : string = "nivel" + this.nivelAtual + 1;
+    this.logger.log(descLog, {});
+
     let modal = this.modalCtrl.create(NivelConcluidoPage, {"nivelAtual" : this.nivelAtual});
     modal.present();
   }
 
   desistir() {
+
+    this.logger.log("desistiu", {});
+
     this.posicao = 0;
     this.posicoesAcertadas = [];
     this.limparQuestoesRespondidasUsuario();

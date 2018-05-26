@@ -9,10 +9,6 @@ page-tabuleiro {
 }
 
 .tabuleiro4posicoes {
-    padding-top: 150px;
-}
-
-.tabuleiro6posicoes {
     padding-top: 120px;
 }
 
@@ -20,10 +16,18 @@ page-tabuleiro {
     padding-top: 90px;
 }
 
-.tabuleiro8posicoes {
+.tabuleiro6posicoes {
     padding-top: 60px;
 }
 
-.tabuleiro10posicoes {
+.tabuleiro8posicoes {
     padding-top: 30px;
+}
+
+.tabuleiro10posicoes {
+    padding-top: 0px;
+}
+
+.texto_questao {
+    font-size: 9px !important;
 }

@@ -25,7 +25,7 @@ export class LoginPage {
   }
 
   ionViewDidEnter() {
-    this.logger.log('abriu_tela_login', {})
+    
   }
 
   createAccount() {
@@ -34,39 +34,6 @@ export class LoginPage {
 
   signInWithEmailPage() {
     this.navCtrl.push(LoginEmailPage);
-  }
-
-  signInWithGoogle() {
-    this.authService.signInWithGoogle()
-      .then(() => {
-        this.navCtrl.setRoot(HomePage);
-      })
-      .catch((error) => {
-        this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Erro ao efetuar o login' })
-          .present();
-      });
-  }
-
-  signInWithFacebook() {
-    this.authService.signInWithFacebook()
-      .then(() => {
-        this.navCtrl.setRoot(HomePage);
-      })
-      .catch((error) => {
-        this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Erro ao efetuar o login' })
-          .present();
-      });
-  }
-
-  signInWithTwitter() {
-    this.authService.signInWithTwitter()
-      .then(() => {
-        this.navCtrl.setRoot(HomePage);
-      })
-      .catch((error) => {
-        this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Erro ao efetuar o login' })
-          .present();
-      });
   }
 
 }
