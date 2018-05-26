@@ -154,61 +154,68 @@ body {
 </head>
 
 <body>
+
 	<img src="resources/gfx/inicial.jpg" class="center" />
 	<div class="login-page">
 		<div class="form">
-			<div class="login-form">
-				<input id="user_name" type="text" placeholder="informe um e-mail" />
+			<form class="login-form">
+				<input id="user_name" type="text" placeholder="informe um usuario" />
 				<input id="user_password" type="password"
 					placeholder="informe uma senha" />
-				<button id="registerToFirebase" onclick="save_user();" type="button">registrar</button>
+				<button onclick="save_user();">registrar</button>
 				<p class="message">
 					Vamos aprender jogando? <span>Registre-se acima!</span>
 				</p>
-			</div>
+			</form>
 		</div>
 	</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
+   var databaseRef = firebase.database().ref('users/');
+   var rowIndex = 1;
+   
+   databaseRef.once('value', function(snapshot) {
+     snapshot.forEach(function(childSnapshot) {
+    var childKey = childSnapshot.key;
+    var childData = childSnapshot.val();
+    
+    var row = tblUsers.insertRow(rowIndex);
+    var cellId = row.insertCell(0);
+    var cellName = row.insertCell(1);
+    cellId.appendChild(document.createTextNode(childKey));
+    cellName.appendChild(document.createTextNode(childData.user_name));
+    
+    rowIndex = rowIndex + 1;
+     });
+   });
+	
+  function save_user(){
+   var user_name = document.getElementById('user_name').value;
+   var user_password = document.getElementById('user_password').value;
 
-	function initApp() {
+   var uid = firebase.database().ref().child('users').push().key;
+   console.log(uid);
+   
+   var data = {
+    user_id: uid,
+    user_name: user_name,
+    user_password: user_password
+   }
+   
+   var updates = {};
+   updates['/users' + uid] = data;
+   firebase.database().ref().update(updates);
+   
+   alert('Cadastro realizado com sucesso!');
+   reload_page();
+  }
+  
+  function reload_page(){
+   window.location.reload();
+  }
+  
+ </script>
 
-		document.getElementById('registerToFirebase').addEventListener('click', save_user);
-	}
-
-	window.onload = function() {
-
-		initApp();
-	}
-
-	function save_user() {
-
-	   var email = document.getElementById('user_name').value;
-	   var password = document.getElementById('user_password').value;
-
-	   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-
-		   var errorCode = error.code;
-		   var errorMessage = error.message;
-
-		   if (errorCode == 'auth/weak-password') {
-			   alert('A senha deve conter ao menos 6 (seis) caracteres!');
-		   }
-
-		   console.log(error);
-	   });
-
-	   alert('Submit efetuado!');
-	   
-	   reload_page();
-    }
-
-    function reload_page() {
-
-        window.location.reload();
-	}
-
-</script>
 </body>
 
 </html>
