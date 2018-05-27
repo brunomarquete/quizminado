@@ -24,7 +24,6 @@ export class NivelConcluidoPage {
 
   ionViewDidLoad() {
       this.nivelAtual = this.navParams.get('nivelAtual');
-      console.log("Modal nível concluído pegou o nivel: " + this.nivelAtual);
   }
 
 }

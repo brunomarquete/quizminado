@@ -6,7 +6,6 @@ import { Platform } from 'ionic-angular';
 export class EventLoggerProvider {
 
   constructor(public firebaseAnalytics: FirebaseAnalytics, private platform: Platform) {
-    console.log('Hello EventLoggerProvider Provider');
   }
  
   log(name:string,value:any){

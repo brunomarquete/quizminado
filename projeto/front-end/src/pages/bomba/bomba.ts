@@ -22,7 +22,7 @@ export class BombaPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BombaPage');
+    
   }
 
 }

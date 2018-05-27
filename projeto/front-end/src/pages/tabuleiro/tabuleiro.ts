@@ -1,6 +1,6 @@
 import { Environment } from '../../environments/environment';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { QuestaoService } from '../../providers/questao/questao.service';
 import { Questao } from '../../models/questao.model';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -41,7 +41,8 @@ export class TabuleiroPage {
               private toastCtrl: ToastController,
               public modalCtrl: ModalController,
               public loadingCtrl: LoadingController,
-              public logger: EventLoggerProvider)  {
+              public logger: EventLoggerProvider,
+              public alertCtrl: AlertController)  {
         
   }
 
@@ -56,10 +57,10 @@ export class TabuleiroPage {
     this.posicoesVitoria = nivel.posicoesVitoria
     this.dificuldade = nivel.dificuldade
 
-    console.log("Nível: " + nivel.numero + " Bombas: " + nivel.bombas + " Dificuldade: " + nivel.dificuldade);
-
     this.buscarQuestoes();
     this.sortearBomba();
+
+    this.msgInicioNivel(this.bombas, this.posicoesVitoria);
   }
 
   buscarQuestoes() {
@@ -75,11 +76,8 @@ export class TabuleiroPage {
         (questoes) => {
           this.questoes = questoes.questao;
           if (this.questoes) {
-              console.log("Vieram " + this.questoes.length + " questões do serviço!");
               loading.dismiss();
-          } else {
-              console.log(" Não vieram questões do serviço!");
-          }
+          } 
         }
     );
   }
@@ -95,17 +93,10 @@ export class TabuleiroPage {
 
         if (this.posicoesBomba.indexOf(posicaoBomba) < 0) {
           this.posicoesBomba.push(posicaoBomba);
-          console.log("Posição da bomba " + i + ": "  + posicaoBomba);
           i++;
         }
-
       }
-
-      
-      
-    } else {
-      console.log("Não tem bomba!");
-    }
+    } 
 
   }
 
@@ -170,8 +161,6 @@ export class TabuleiroPage {
     (resposta) => {
 
           resultado = resposta.Mensagem;
-
-          console.log(resultado);
 
           loading.dismiss();
 
@@ -246,11 +235,32 @@ export class TabuleiroPage {
   limparQuestoesRespondidasUsuario() {
 
     this.questaoService.limparQuestoesRespondidasPorUsuario(this.angularFireAuth.auth.currentUser.email).subscribe(
-      () => {
-        console.log("Questões limpadas.");
-      }
+      () => {}
     );
 
   }
+
+  msgInicioNivel(bombas: number, pontosVitoria: number) {
+
+    if (bombas ==0) {
+
+        let alert = this.alertCtrl.create({
+          title: 'Atenção!',
+          subTitle: 'Você precisa acertar ' + pontosVitoria + ' questão(ões) para completar este nível. Não há bombas! Bom jogo!',
+          buttons: ['OK']
+        });
+        alert.present();
+        
+      } else {
+
+        let alert = this.alertCtrl.create({
+          title: 'Atenção!',
+          subTitle: 'Cuidado! Há ' + bombas + ' bomba(s) escondida(s). Você precisa acertar ' +  pontosVitoria + ' questão(ões) para completar este nível. Bom jogo!',
+          buttons: ['OK']
+        });
+        alert.present();
+
+      }
+    }
 
 }

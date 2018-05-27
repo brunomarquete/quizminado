@@ -9,6 +9,7 @@
 <ion-content class="fundo" text-center padding >
 
     <div [ngClass]="{'tabuleiro4posicoes' : posicoes && posicoes == 4, 'tabuleiro6posicoes' : posicoes && posicoes == 6, 'tabuleiro8posicoes' : posicoes && posicoes == 8, 'tabuleiro10posicoes' : posicoes && posicoes == 10}" *ngIf="isExibirTabuleiro">
+      
         <div class="tituloNivel"> Nível {{nivelAtual}}</div>
         <ion-grid>
             <ion-row>
@@ -103,6 +104,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
+
     </div>
 
     <div *ngIf="isExibirQuestao && questao">
@@ -134,6 +136,7 @@
                 </ion-col>
             </ion-row>
     </ion-grid>
+
     </div>
 
 </ion-content>
