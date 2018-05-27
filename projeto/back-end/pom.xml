@@ -4,7 +4,7 @@
 	<groupId>br.com.ppcacws</groupId>
 	<artifactId>quizminado</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>quizminado Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

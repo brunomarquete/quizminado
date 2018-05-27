@@ -5,7 +5,6 @@ import { LoginPage } from '../login/login';
 import { Disciplina } from '../../models/disciplina.model';
 import { TabuleiroPage } from '../tabuleiro/tabuleiro';
 import { CreditosPage } from '../creditos/creditos';
-import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-home',
