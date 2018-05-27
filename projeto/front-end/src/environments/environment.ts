@@ -6,7 +6,7 @@ export const Environment = {
     api: 'http://www.quizminado.com.br/rest/', 
 
     niveis: [{"numero" : 1, "posicoes": 4, "bombas" : 0, "posicoesVitoria" : 4, "dificuldade" : 1},
-             {"numero" : 2, "posicoes": 4, "bombas" : 1, "posicoesVitoria" : 1, "dificuldade" : 1},
+             {"numero" : 2, "posicoes": 4, "bombas" : 1, "posicoesVitoria" : 2, "dificuldade" : 1},
              {"numero" : 3, "posicoes": 4, "bombas" : 0, "posicoesVitoria" : 4, "dificuldade" : 2},
              {"numero" : 4, "posicoes": 4, "bombas" : 1, "posicoesVitoria" : 2, "dificuldade" : 2},
              {"numero" : 5, "posicoes": 6, "bombas" : 0, "posicoesVitoria" : 6, "dificuldade" : 1},
