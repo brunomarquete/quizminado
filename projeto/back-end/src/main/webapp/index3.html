@@ -1,10 +1,7 @@
-<!DOCTYPE HTML>
 <html>
 <head>
 
 <title>Quizminado</title>
-
-<meta charset="utf-8" />
 
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
@@ -165,24 +162,14 @@ body {
 				<input id="user_password" type="password"
 					placeholder="informe uma senha" />
 				<button id="registerToFirebase" onclick="save_user();" type="button">registrar</button>
-				<p id="msgErro" class="message"
-					style="color: #E91E63; font-weight: bold;"></p>
-				<p id="msgSucesso" class="message"
-					style="color: #4CAF50; font-weight: bold;"></p>
 				<p class="message">
-					Vamos aprender jogando? <span style="color: #000000;">Registre-se
-						acima!</span>
-				</p>
-				<p class="message">
-					<a href="privacidade.html"
-						style="text-decoration: underline; color: #337ab7; font-weight: bold;">Política
-						de Privacidade</a>
+					Vamos aprender jogando? <span>Registre-se acima!</span>
 				</p>
 			</div>
 		</div>
 	</div>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
 	function initApp() {
 
@@ -205,30 +192,15 @@ body {
 		   var errorMessage = error.message;
 
 		   if (errorCode == 'auth/weak-password') {
-			   //alert('A senha deve conter no mínimo 6 (seis) caracteres!');
-			   document.getElementById("msgErro").innerHTML = "A senha deve conter no mínimo 6 (seis) caracteres!";
-			   document.getElementById("msgSucesso").innerHTML = "";
+			   alert('A senha deve conter ao menos 6 (seis) caracteres!');
 		   }
 
 		   console.log(error);
 	   });
 
-	   //alert('Cadastro enviado!');
-	    if(email == '' || password == '') {
-
-		   document.getElementById("msgErro").innerHTML = "Por favor, preencha os campos e-mail e senha!";
-		   document.getElementById("msgSucesso").innerHTML = "";
-
-	   } else {
-
-		   document.getElementById("msgSucesso").innerHTML = "Cadastro enviado!";
-		   document.getElementById("msgErro").innerHTML = "";
-	   }
-
-	   //document.getElementById('user_name').value = '';
-	   //document.getElementById('user_password').value = '';
+	   alert('Submit efetuado!');
 	   
-	   //reload_page();
+	   reload_page();
     }
 
     function reload_page() {
