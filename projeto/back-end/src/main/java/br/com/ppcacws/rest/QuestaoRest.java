@@ -70,7 +70,7 @@ public class QuestaoRest {
 			
 			entity = new GenericEntity<QuestaoVo>(questao) {};
 			
-			return Response.ok(entity).build();
+			return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 			
 		} catch (Exception e) {
 			
@@ -80,7 +80,8 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -95,7 +96,7 @@ public class QuestaoRest {
 
 		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
 		
-		return Response.ok(entity).build();
+		return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@POST
@@ -125,7 +126,8 @@ public class QuestaoRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.OK).entity(json).build();
+				return Response.status(Response.Status.OK).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 
 			} else {
 
@@ -133,7 +135,8 @@ public class QuestaoRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 
 		} catch (Exception e) {
@@ -144,7 +147,8 @@ public class QuestaoRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -187,7 +191,8 @@ public class QuestaoRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.OK).entity(json).build();
+				return Response.status(Response.Status.OK).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 
 			} else {
 
@@ -195,7 +200,8 @@ public class QuestaoRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 
 		} catch (Exception e) {
@@ -206,7 +212,8 @@ public class QuestaoRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -240,7 +247,7 @@ public class QuestaoRest {
 
 				json = new JSONObject(response);
 
-				return Response.ok(json).build();
+				return Response.ok(json).header("Access-Control-Allow-Origin", "*").build();
 
 			} else {
 
@@ -248,7 +255,8 @@ public class QuestaoRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+				return Response.status(Response.Status.NOT_FOUND).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 
 		} catch (Exception e) {
@@ -259,7 +267,8 @@ public class QuestaoRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -286,7 +295,7 @@ public class QuestaoRest {
 			
 			entity = new GenericEntity<QuestaoVo>(questao) {};
 			
-			return Response.ok(entity).build();
+			return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 			
 		} catch (Exception e) {
 			
@@ -296,7 +305,8 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -313,7 +323,7 @@ public class QuestaoRest {
 
 		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
 		
-		return Response.ok(entity).build();
+		return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@GET
@@ -331,7 +341,7 @@ public class QuestaoRest {
 
 		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
 		
-		return Response.ok(entity).build();
+		return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 	}
 
 	@GET
@@ -349,7 +359,7 @@ public class QuestaoRest {
 
 		GenericEntity<List<QuestaoVo>> entity = new GenericEntity<List<QuestaoVo>>(lista) {};
 		
-		return Response.ok(entity).build();
+		return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@GET
@@ -359,7 +369,7 @@ public class QuestaoRest {
 
 		controleQuestoesService.limparQuestoesRespondidasPorUsuario(idUsuario);
 		
-		return Response.ok().build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@GET
@@ -369,7 +379,7 @@ public class QuestaoRest {
 
 		controleQuestoesService.limparTodasQuestoesRespondidas();
 		
-		return Response.ok().build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
 
 	@GET
@@ -397,7 +407,8 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.OK).entity(json).build();
+			return Response.status(Response.Status.OK).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 			
 		} catch (Exception e) {
 			
@@ -407,7 +418,8 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -437,7 +449,8 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.OK).entity(json).build();
+			return Response.status(Response.Status.OK).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 			
 		} catch (Exception e) {
 			
@@ -447,7 +460,8 @@ public class QuestaoRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 

@@ -52,7 +52,7 @@ public class NivelRest {
 			
 			entity = new GenericEntity<NivelVo>(nivel) {};
 			
-			return Response.ok(entity).build();
+			return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 			
 		} catch (Exception e) {
 			
@@ -62,7 +62,8 @@ public class NivelRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -77,7 +78,7 @@ public class NivelRest {
 
 		GenericEntity<List<NivelVo>> entity = new GenericEntity<List<NivelVo>>(lista) {};
 		
-		return Response.ok(entity).build();
+		return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 	}
 
 	@POST
@@ -103,7 +104,8 @@ public class NivelRest {
 				
 				json = new JSONObject(response);
 				
-				return Response.status(Response.Status.OK).entity(json).build();
+				return Response.status(Response.Status.OK).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			
 			} else {
 				
@@ -111,7 +113,8 @@ public class NivelRest {
 				
 				json = new JSONObject(response);
 				
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 			
 		} catch (Exception e) {
@@ -122,7 +125,8 @@ public class NivelRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 
@@ -162,7 +166,8 @@ public class NivelRest {
 				
 				json = new JSONObject(response);
 				
-				return Response.status(Response.Status.OK).entity(json).build();
+				return Response.status(Response.Status.OK).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 				
 			} else {
 				
@@ -170,7 +175,8 @@ public class NivelRest {
 				
 				json = new JSONObject(response);
 				
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 		
 		} catch (Exception e) {
@@ -181,7 +187,8 @@ public class NivelRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 	
@@ -215,7 +222,7 @@ public class NivelRest {
 				
 				json = new JSONObject(response);
 				
-				return Response.ok(json).build();
+				return Response.ok(json).header("Access-Control-Allow-Origin", "*").build();
 				
 			} else {
 				
@@ -223,7 +230,8 @@ public class NivelRest {
 				
 				json = new JSONObject(response);
 				
-				return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+				return Response.status(Response.Status.NOT_FOUND).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 			
 		} catch (Exception e) {
@@ -234,7 +242,8 @@ public class NivelRest {
 			
 			json = new JSONObject(response);
 			
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 

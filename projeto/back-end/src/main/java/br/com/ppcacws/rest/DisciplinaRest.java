@@ -55,7 +55,7 @@ public class DisciplinaRest {
 
 			entity = new GenericEntity<DisciplinaVo>(disciplina) {};
 
-			return Response.ok(entity).build();
+			return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 
 		} catch (Exception e) {
 
@@ -65,7 +65,8 @@ public class DisciplinaRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 
@@ -80,7 +81,7 @@ public class DisciplinaRest {
 
 		GenericEntity<List<DisciplinaVo>> entity = new GenericEntity<List<DisciplinaVo>>(lista) {};
 
-		return Response.ok(entity).build();
+		return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
 	}
 
 	@POST
@@ -106,7 +107,8 @@ public class DisciplinaRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.OK).entity(json).build();
+				return Response.status(Response.Status.OK).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 
 			} else {
 
@@ -114,7 +116,8 @@ public class DisciplinaRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 
 		} catch (Exception e) {
@@ -125,7 +128,8 @@ public class DisciplinaRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 
@@ -165,7 +169,8 @@ public class DisciplinaRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.OK).entity(json).build();
+				return Response.status(Response.Status.OK).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 
 			} else {
 
@@ -173,7 +178,8 @@ public class DisciplinaRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 
 		} catch (Exception e) {
@@ -184,7 +190,8 @@ public class DisciplinaRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 
@@ -218,7 +225,7 @@ public class DisciplinaRest {
 
 				json = new JSONObject(response);
 
-				return Response.ok(json).build();
+				return Response.ok(json).header("Access-Control-Allow-Origin", "*").build();
 
 			} else {
 
@@ -226,7 +233,8 @@ public class DisciplinaRest {
 
 				json = new JSONObject(response);
 
-				return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+				return Response.status(Response.Status.NOT_FOUND).entity(json)
+						.header("Access-Control-Allow-Origin", "*").build();
 			}
 
 		} catch (Exception e) {
@@ -237,7 +245,8 @@ public class DisciplinaRest {
 
 			json = new JSONObject(response);
 
-			return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+			return Response.status(Response.Status.NOT_FOUND).entity(json)
+					.header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
 
