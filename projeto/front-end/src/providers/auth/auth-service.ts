@@ -4,7 +4,7 @@ import { User } from './user';
 import * as firebase from 'firebase/app';
 
 @Injectable()
-export class AuthService {
+export class AuthService { 
 
   constructor(private angularFireAuth: AngularFireAuth) { }
 
@@ -16,7 +16,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
   }
 
-  signOut() : Promise<any> { //firebase.Promise<any>
+  signOut() : Promise<any> { // firebase.Promise<any>
     return this.angularFireAuth.auth.signOut();
   }
 

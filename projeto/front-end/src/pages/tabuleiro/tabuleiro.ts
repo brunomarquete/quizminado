@@ -215,7 +215,7 @@ export class TabuleiroPage {
 
   nivelConcluido() {
 
-    let descLog : string = "nivel" + this.nivelAtual + 1;
+    let descLog : string = "nivel" + (this.nivelAtual + 1);
     this.logger.log(descLog, {});
 
     let modal = this.modalCtrl.create(NivelConcluidoPage, {"nivelAtual" : this.nivelAtual});
